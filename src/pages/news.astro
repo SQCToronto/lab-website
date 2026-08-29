@@ -1,0 +1,92 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import NewsCard from '../components/NewsCard.astro';
+
+const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const launch = news.find((entry) => entry.data.category === 'move');
+const updates = news.filter((entry) => entry !== launch);
+---
+
+<BaseLayout title="News" description="News and recent work from the Wang Lab.">
+  <PageIntro
+    eyebrow="News"
+    title="Notes from the lab."
+    description="Paper highlights, group updates, and the beginning of the Wang Lab's Toronto chapter."
+  />
+
+  {launch && (
+    <section class="launch-note">
+      <div class="launch-inner">
+        <p class="section-marker">The next chapter · 2026</p>
+        <h2>{launch.data.title}</h2>
+        <p>{launch.data.summary}</p>
+      </div>
+    </section>
+  )}
+
+  <section class="news-section">
+    <div class="news-list">
+      {updates.map((entry) => <NewsCard entry={entry} featured />)}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .launch-note {
+    color: var(--white);
+    background: var(--graphite-soft);
+  }
+
+  .launch-inner,
+  .news-section {
+    max-width: var(--content);
+    margin: 0 auto;
+    padding-right: clamp(1.25rem, 4vw, 4rem);
+    padding-left: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .launch-inner {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .launch-inner h2 {
+    max-width: 42rem;
+    margin: 1rem 0;
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .launch-inner p:not(.section-marker) {
+    max-width: 42rem;
+    margin: 0;
+    color: #b9c9c3;
+    line-height: 1.7;
+  }
+
+  .news-section {
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+  }
+
+  .news-list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .launch-inner h2 {
+      font-size: 2.7rem;
+    }
+
+    .news-list {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

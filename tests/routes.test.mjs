@@ -29,3 +29,16 @@ test('publications page preserves recent and landmark work', async () => {
   const html = await readFile('dist/publications/index.html', 'utf8');
   for (const title of ['Hardware-Efficient Erasure Qubits', 'Passive Quantum Error Correction', 'A Schrodinger cat living in two boxes']) assert.match(html, new RegExp(title, 'i'));
 });
+
+test('news page leads with the 2026 move and recent work', async () => {
+  const html = await readFile('dist/news/index.html', 'utf8');
+  for (const text of ['University of Toronto', 'Passive Quantum Error Correction', 'Hardware-Efficient Erasure Qubits']) assert.match(html, new RegExp(text));
+});
+
+test('join page points applicants to Toronto', async () => {
+  const html = await readFile('dist/join/index.html', 'utf8');
+  assert.match(html, /postdoctoral/i);
+  assert.match(html, /graduate/i);
+  assert.match(html, /physics\.utoronto\.ca/);
+  assert.doesNotMatch(html, /apply.*UMass/i);
+});

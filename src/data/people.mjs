@@ -15,7 +15,7 @@ export const people = [
   { id: 'hanzhe-xi', name: 'Hanzhe Xi', role: 'Graduate student', group: 'graduate', image: '/images/people/hanzhe-xi.jpg' },
   { id: 'zetong-zhuang', name: 'Zetong Zhuang', role: 'Graduate student', group: 'graduate', image: '/images/people/zetong-zhuang.jpg' },
   { id: 'manthan-badbaria', name: 'Manthan Badbaria', role: 'Graduate student', group: 'graduate' },
-  { id: 'baojie-liu', name: 'Baojie Liu', role: 'Postdoctoral associate', group: 'postdoctoral', image: '/images/people/baojie-liu.jpg' },
+  { id: 'baojie-liu', name: 'Baojie Liu', role: 'Postdoctoral associate', group: 'postdoctoral' },
   { id: 'ben-kuchma', name: 'Ben Kuchma', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'alison-irwin', name: 'Alison Irwin', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'jiayi-sun', name: 'Jiayi Sun', role: 'Undergraduate student', group: 'undergraduate' },

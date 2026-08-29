@@ -1,5 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { access } from 'node:fs/promises';
+import { fileURLToPath } from 'node:url';
 import { researchThemes } from '../src/data/research.mjs';
 import { people } from '../src/data/people.mjs';
 import { publications } from '../src/data/publications.mjs';
@@ -22,5 +24,17 @@ test('carries the current roster forward', () => {
 test('includes the complete migrated publication eras', () => {
   for (const year of [2026, 2025, 2024, 2023, 2022, 2021, 2019, 2018, 2016]) {
     assert.ok(publications.some((publication) => publication.year === year), String(year));
+  }
+});
+
+test('all declared images are stored locally', async () => {
+  const paths = [
+    ...researchThemes.map(({ image }) => image),
+    ...people.flatMap(({ image }) => image ? [image] : []),
+  ];
+
+  for (const image of paths) {
+    assert.match(image, /^\/images\//);
+    await access(fileURLToPath(new URL(`../public${image}`, import.meta.url)));
   }
 });

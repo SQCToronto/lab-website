@@ -1,0 +1,118 @@
+---
+import { withBase } from '../lib/paths.mjs';
+
+interface Props {
+  person: {
+    name: string;
+    role: string;
+    image?: string;
+    detail?: string;
+    destination?: string;
+  };
+  featured?: boolean;
+}
+
+const { person, featured = false } = Astro.props;
+const initials = person.name.split(' ').map((part) => part[0]).slice(0, 2).join('');
+---
+
+<article class:list={['person-entry', { featured }]}>
+  <div class="person-portrait">
+    {person.image
+      ? <img src={withBase(person.image)} alt={'Portrait of ' + person.name} loading={featured ? 'eager' : 'lazy'} />
+      : <span aria-label={'Initials for ' + person.name}>{initials}</span>}
+  </div>
+  <div class="person-copy">
+    <h3>{person.name}</h3>
+    <p class="person-role">{person.role}</p>
+    {person.detail && <p class="person-detail">{person.detail}</p>}
+    {person.destination && <p class="person-destination">{person.destination}</p>}
+  </div>
+</article>
+
+<style>
+  .person-entry {
+    display: grid;
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    padding: 1.25rem 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .person-entry.featured {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 2rem;
+    padding: 0;
+    border-top: 0;
+  }
+
+  .person-portrait {
+    aspect-ratio: 1 / 1;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    background: var(--surface-alt);
+  }
+
+  .person-entry.featured .person-portrait {
+    aspect-ratio: 0.82;
+  }
+
+  .person-portrait img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .person-portrait span {
+    color: var(--teal-dark);
+    font-family: var(--serif);
+    font-size: 1.5rem;
+  }
+
+  .person-copy h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    line-height: 1.2;
+  }
+
+  .person-entry.featured .person-copy h3 {
+    font-family: var(--serif);
+    font-size: 2.6rem;
+    font-weight: 400;
+  }
+
+  .person-role,
+  .person-destination {
+    margin: 0.35rem 0 0;
+    color: var(--teal-dark);
+    font-size: 0.78rem;
+    font-weight: 750;
+  }
+
+  .person-detail {
+    max-width: 32rem;
+    margin: 1.3rem 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .person-destination {
+    color: var(--coral);
+    font-size: 0.72rem;
+  }
+
+  @media (max-width: 600px) {
+    .person-entry.featured {
+      grid-template-columns: 7.5rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .person-entry.featured .person-copy h3 {
+      font-size: 2rem;
+    }
+  }
+</style>

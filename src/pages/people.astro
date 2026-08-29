@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PersonEntry from '../components/PersonEntry.astro';
+import { people } from '../data/people.mjs';
+import { withBase } from '../lib/paths.mjs';
+
+const principalInvestigator = people.find((person) => person.group === 'principal-investigator');
+const currentPeople = people.filter((person) => person.group !== 'alumni' && person.group !== 'principal-investigator');
+const currentGroups = [
+  { label: 'Postdoctoral associates', group: 'postdoctoral' },
+  { label: 'Graduate students', group: 'graduate' },
+  { label: 'Undergraduate students', group: 'undergraduate' },
+];
+const alumni = people.filter((person) => person.group === 'alumni');
+---
+
+<BaseLayout title="People" description="Current members and alumni of the Wang Lab.">
+  <PageIntro
+    eyebrow="People"
+    title="The people behind the experiments."
+    description="The lab's current team carries forward the UMass Amherst chapter as we build a new research community in Toronto."
+  />
+
+  <section class="people-section lead-section">
+    <div class="lead-copy">
+      <p class="section-marker">Principal investigator</p>
+      <PersonEntry person={principalInvestigator} featured />
+    </div>
+  </section>
+
+  <section class="people-section current-section">
+    <div class="section-heading">
+      <p class="section-marker">Current members</p>
+      <h2>One group, several ways into the work.</h2>
+    </div>
+    {currentGroups.map((section) => {
+      const members = currentPeople.filter((person) => person.group === section.group);
+      return members.length > 0 && (
+        <div class="people-group">
+          <h2>{section.label}</h2>
+          <div class="people-grid">{members.map((person) => <PersonEntry person={person} />)}</div>
+        </div>
+      );
+    })}
+  </section>
+
+  <section class="alumni-section">
+    <div class="people-section">
+      <div class="section-heading">
+        <p class="section-marker">Alumni</p>
+        <h2>A growing scientific family.</h2>
+      </div>
+      <div class="alumni-grid">{alumni.map((person) => <PersonEntry person={person} />)}</div>
+    </div>
+  </section>
+
+  <section class="group-history">
+    <div class="people-section group-history-inner">
+      <div>
+        <p class="section-marker">Group history</p>
+        <h2>From our first chapter to the next.</h2>
+        <p>These photographs document the people and shared work that brought the lab to Toronto.</p>
+      </div>
+      <figure>
+        <img src={withBase('/images/group/group-photo-2023.jpg')} alt="The Wang Lab group in 2023." loading="lazy" />
+        <figcaption>Wang Lab, 2023</figcaption>
+      </figure>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .people-section {
+    max-width: var(--content);
+    margin: 0 auto;
+    padding-right: clamp(1.25rem, 4vw, 4rem);
+    padding-left: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .lead-section {
+    padding-bottom: 5rem;
+  }
+
+  .lead-copy {
+    max-width: 62rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .lead-copy .person-entry {
+    margin-top: 2rem;
+  }
+
+  .current-section {
+    padding-top: 5rem;
+    padding-bottom: 6rem;
+  }
+
+  .section-heading {
+    display: grid;
+    grid-template-columns: 0.7fr 1.3fr;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .section-heading .section-marker {
+    margin-top: 0.5rem;
+  }
+
+  .section-heading h2,
+  .group-history h2 {
+    max-width: 38rem;
+    margin: 0;
+    font-family: var(--serif);
+    font-size: 3.1rem;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: 0;
+  }
+
+  .people-group {
+    margin-top: 3.5rem;
+  }
+
+  .people-group > h2 {
+    margin: 0 0 0.75rem;
+    color: var(--teal-dark);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 4rem;
+  }
+
+  .alumni-section {
+    background: var(--surface-alt);
+  }
+
+  .alumni-section .people-section {
+    padding-top: 5.5rem;
+    padding-bottom: 6rem;
+  }
+
+  .alumni-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 4rem;
+  }
+
+  .group-history {
+    color: var(--white);
+    background: var(--graphite-soft);
+  }
+
+  .group-history-inner {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 4rem;
+    align-items: center;
+    padding-top: 6rem;
+    padding-bottom: 6rem;
+  }
+
+  .group-history p:not(.section-marker) {
+    max-width: 26rem;
+    margin: 1.5rem 0 0;
+    color: #afbfba;
+    line-height: 1.7;
+  }
+
+  .group-history figure {
+    margin: 0;
+  }
+
+  .group-history img {
+    width: 100%;
+    display: block;
+    border: 1px solid var(--line-dark);
+  }
+
+  .group-history figcaption {
+    margin-top: 0.75rem;
+    color: #afbfba;
+    font-size: 0.75rem;
+  }
+
+  @media (max-width: 700px) {
+    .section-heading,
+    .group-history-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .section-heading h2,
+    .group-history h2 {
+      font-size: 2.45rem;
+    }
+
+    .people-grid,
+    .alumni-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

@@ -19,3 +19,13 @@ for (const [file, required] of [
     for (const text of required) assert.match(html, new RegExp(text));
   });
 }
+
+test('people page carries the active roster and alumni', async () => {
+  const html = await readFile('dist/people/index.html', 'utf8');
+  for (const name of ['Chen Wang', 'Yingying Wang', 'Baojie Liu', 'Jeffrey Gertler']) assert.match(html, new RegExp(name));
+});
+
+test('publications page preserves recent and landmark work', async () => {
+  const html = await readFile('dist/publications/index.html', 'utf8');
+  for (const title of ['Hardware-Efficient Erasure Qubits', 'Passive Quantum Error Correction', 'A Schrodinger cat living in two boxes']) assert.match(html, new RegExp(title, 'i'));
+});

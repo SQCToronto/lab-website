@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import PublicationList from '../components/PublicationList.astro';
+import { publications } from '../data/publications.mjs';
+---
+
+<BaseLayout title="Publications" description="Publications from the Wang Lab, grouped by year.">
+  <PageIntro
+    eyebrow="Publications"
+    title="A record of the work."
+    description="Selected research from the lab's UMass Amherst chapter and its continuing work in quantum information science."
+  />
+  <section class="publication-section">
+    <div class="publication-note">
+      <p class="section-marker">Complete selected record</p>
+      <p>Journal articles, conference papers, and the current 2026 preprint are listed chronologically.</p>
+    </div>
+    <PublicationList publications={publications} />
+  </section>
+</BaseLayout>
+
+<style>
+  .publication-section {
+    max-width: var(--content);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 4rem) 6rem;
+  }
+
+  .publication-note {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  .publication-note p {
+    max-width: 32rem;
+    margin: 0;
+    color: var(--muted);
+  }
+
+  .publication-note .section-marker {
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .publication-note {
+      grid-template-columns: 1fr;
+      gap: 0.75rem;
+    }
+  }
+</style>

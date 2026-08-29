@@ -1,0 +1,97 @@
+---
+interface Props {
+  publications: {
+    year: number;
+    authors: string;
+    title: string;
+    venue: string;
+    url?: string;
+  }[];
+}
+
+const { publications } = Astro.props;
+const years = [...new Set(publications.map((publication) => publication.year))].sort((a, b) => b - a);
+---
+
+<div class="publication-list">
+  {years.map((year) => (
+    <section class="publication-year" aria-labelledby={'year-' + year}>
+      <h2 id={'year-' + year}>{year}</h2>
+      <div class="publication-items">
+        {publications.filter((publication) => publication.year === year).map((publication) => (
+          <article class="publication-entry">
+            <p class="publication-authors">{publication.authors}</p>
+            <h3>{publication.title}</h3>
+            <p class="publication-venue">
+              {publication.url ? <a href={publication.url}>{publication.venue}<span aria-hidden="true">↗</span></a> : publication.venue}
+            </p>
+          </article>
+        ))}
+      </div>
+    </section>
+  ))}
+</div>
+
+<style>
+  .publication-year {
+    display: grid;
+    grid-template-columns: 7rem minmax(0, 1fr);
+    gap: 2rem;
+    padding: 2rem 0 2.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .publication-year h2 {
+    margin: 0;
+    color: var(--coral);
+    font-family: var(--serif);
+    font-size: 2rem;
+    font-weight: 400;
+  }
+
+  .publication-items {
+    display: grid;
+    gap: 1.8rem;
+  }
+
+  .publication-entry {
+    max-width: 46rem;
+  }
+
+  .publication-authors,
+  .publication-venue {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .publication-entry h3 {
+    margin: 0.35rem 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .publication-venue {
+    color: var(--teal-dark);
+    font-weight: 700;
+  }
+
+  .publication-venue a {
+    text-underline-offset: 3px;
+    text-decoration-color: var(--teal);
+  }
+
+  .publication-venue span {
+    margin-left: 0.45rem;
+    color: var(--coral);
+  }
+
+  @media (max-width: 600px) {
+    .publication-year {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

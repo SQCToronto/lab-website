@@ -9,11 +9,11 @@ const launch = news.find((entry) => entry.data.category === 'move');
 const updates = news.filter((entry) => entry !== launch);
 ---
 
-<BaseLayout title="News" description="News and recent work from the Wang Lab.">
+<BaseLayout title="News" description="News and recent work from the Superconducting Qubit Toronto Lab.">
   <PageIntro
     eyebrow="News"
     title="Notes from the lab."
-    description="Paper highlights, group updates, and the beginning of the Wang Lab's Toronto chapter."
+    description="Paper highlights, group updates, and the beginning of SQT Lab's Toronto chapter."
   />
 
   {launch && (

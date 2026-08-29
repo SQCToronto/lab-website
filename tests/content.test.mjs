@@ -15,10 +15,41 @@ test('publishes the four approved research themes', () => {
   ]);
 });
 
-test('carries the current roster forward', () => {
-  for (const name of ['Chen Wang', 'Yingying Wang', 'Sean van Geldern', 'Shruti Shirol', 'Tanvir Masum', 'Hanzhe Xi', 'Zetong Zhuang', 'Manthan Badbaria', 'Baojie Liu']) {
-    assert.ok(people.some((person) => person.name === name && person.group !== 'alumni'), name);
+test('publishes the current SQT Lab roster with updated roles', () => {
+  const expectedCurrentMembers = [
+    ['Chen Wang', 'principal-investigator', 'Associate Professor'],
+    ['Sean van Geldern', 'postdoctoral', 'Postdoctoral Associate'],
+    ['Baojie Liu', 'research-scientist', 'Research Scientist'],
+    ['Carlos Sanchez Cruz', 'graduate', 'Graduate student'],
+    ['Layla Saraj', 'graduate', 'Graduate student'],
+    ['Ian Dong', 'undergraduate', 'Undergraduate student'],
+    ['Berke Basak', 'undergraduate', 'Undergraduate student'],
+  ];
+
+  for (const [name, group, role] of expectedCurrentMembers) {
+    assert.ok(people.some((person) => person.name === name && person.group === group && person.role === role), name);
   }
+});
+
+test('keeps former members only in alumni with their next destinations', () => {
+  const expectedAlumni = [
+    ['Yingying Wang', 'Juliang Guangqi'],
+    ['Shruti Shirol', 'Q-CTRL'],
+    ['Ben Kuchma', 'MIT Physics'],
+    ['Alison Irwin', 'UMass Chan Medical School'],
+    ['Jiayi Sun', 'Stanford Applied Physics'],
+  ];
+
+  for (const [name, destination] of expectedAlumni) {
+    assert.ok(people.some((person) => person.name === name && person.group === 'alumni' && person.destination === destination), name);
+    assert.ok(!people.some((person) => person.name === name && person.group !== 'alumni'), `${name} is not listed as active`);
+  }
+});
+
+test('places the 2023 pair-coherent-state result in autonomous quantum protection', () => {
+  const protection = researchThemes.find((theme) => theme.id === 'autonomous-quantum-protection');
+  assert.equal(protection?.image, '/images/research/pair-coherent-states.png');
+  assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
 });
 
 test('includes the complete migrated publication eras', () => {

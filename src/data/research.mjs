@@ -4,7 +4,7 @@ export const researchThemes = [
     title: 'Autonomous Quantum Protection',
     summary: 'We use reservoir engineering and bosonic encodings to stabilize fragile quantum states and realize autonomous protection against dominant errors.',
     eyebrow: 'Stabilization',
-    image: '/images/research/passive-qec-wigner.png',
+    image: '/images/research/pair-coherent-states.png',
     projects: [
       {
         title: 'Passive Quantum Error Correction of Photon Loss at Breakeven',
@@ -13,6 +13,10 @@ export const researchThemes = [
       {
         title: 'Protecting a Bosonic Qubit with Autonomous Quantum Error Correction',
         url: 'https://www.nature.com/articles/s41586-021-03257-0',
+      },
+      {
+        title: 'Experimental Realization and Characterization of Stabilized Pair Coherent States',
+        url: 'https://journals.aps.org/prxquantum/abstract/10.1103/PRXQuantum.4.020319',
       },
     ],
   },
@@ -38,7 +42,7 @@ export const researchThemes = [
     title: 'Hardware-Efficient Quantum Error Correction',
     summary: 'We develop erasure qubits, efficient multi-qubit gates, and architectures that reduce the physical resources required for reliable quantum computation.',
     eyebrow: 'Error correction',
-    image: '/images/research/pair-coherent-states.png',
+    image: '/images/lab/chen-with-fridge.jpg',
     projects: [
       {
         title: 'Hardware-Efficient Erasure Qubits With Superconducting Transmon Qutrits',

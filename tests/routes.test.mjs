@@ -2,9 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-test('home build includes the shared identity and six base-safe destinations', async () => {
+test('home build includes the SQT Lab identity and six base-safe destinations', async () => {
   const html = await readFile('dist/index.html', 'utf8');
-  assert.match(html, /Wang Lab/);
+  assert.match(html, /Superconducting Qubit Toronto Lab/);
+  assert.match(html, /SQT Lab/);
   for (const route of ['research', 'people', 'publications', 'news', 'join']) {
     assert.match(html, new RegExp(`href="/lab-website/${route}/?"`));
   }
@@ -20,9 +21,10 @@ for (const [file, required] of [
   });
 }
 
-test('people page carries the active roster and alumni', async () => {
+test('people page carries the updated roster and alumni', async () => {
   const html = await readFile('dist/people/index.html', 'utf8');
-  for (const name of ['Chen Wang', 'Yingying Wang', 'Baojie Liu', 'Jeffrey Gertler']) assert.match(html, new RegExp(name));
+  for (const name of ['Chen Wang', 'Sean van Geldern', 'Baojie Liu', 'Carlos Sanchez Cruz', 'Layla Saraj', 'Ian Dong', 'Berke Basak', 'Yingying Wang', 'Shruti Shirol']) assert.match(html, new RegExp(name));
+  for (const role of ['Postdoctoral Associate', 'Research Scientist']) assert.match(html, new RegExp(role));
 });
 
 test('publications page preserves recent and landmark work', async () => {

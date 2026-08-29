@@ -9,13 +9,14 @@ const principalInvestigator = people.find((person) => person.group === 'principa
 const currentPeople = people.filter((person) => person.group !== 'alumni' && person.group !== 'principal-investigator');
 const currentGroups = [
   { label: 'Postdoctoral associates', group: 'postdoctoral' },
+  { label: 'Research scientist', group: 'research-scientist' },
   { label: 'Graduate students', group: 'graduate' },
   { label: 'Undergraduate students', group: 'undergraduate' },
 ];
 const alumni = people.filter((person) => person.group === 'alumni');
 ---
 
-<BaseLayout title="People" description="Current members and alumni of the Wang Lab.">
+<BaseLayout title="People" description="Current members and alumni of the Superconducting Qubit Toronto Lab.">
   <PageIntro
     eyebrow="People"
     title="The people behind the experiments."
@@ -63,8 +64,8 @@ const alumni = people.filter((person) => person.group === 'alumni');
         <p>These photographs document the people and shared work that brought the lab to Toronto.</p>
       </div>
       <figure>
-        <img src={withBase('/images/group/group-photo-2023.jpg')} alt="The Wang Lab group in 2023." loading="lazy" />
-        <figcaption>Wang Lab, 2023</figcaption>
+        <img src={withBase('/images/group/group-photo-2025.jpg')} alt="SQT Lab members outside the Physical Sciences Building at the University of Toronto." loading="lazy" />
+        <figcaption>SQT Lab, University of Toronto, 2025</figcaption>
       </figure>
     </div>
   </section>

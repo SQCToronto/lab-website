@@ -10,21 +10,31 @@ const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() 
 const highlights = news.filter((entry) => entry.data.category === 'paper').slice(0, 3);
 ---
 
-<BaseLayout title="Wang Lab" description="Experimental quantum information science with superconducting circuits at the University of Toronto." theme="dark">
-  <section class="home-hero">
+<BaseLayout title="Superconducting Qubit Toronto Lab" description="Experimental quantum information science with superconducting circuits at the University of Toronto." theme="dark">
+  <section class="home-hero" style={{ '--hero-image': `url(${withBase('/images/hero/sqt-circuit-landscape.png')})` }}>
     <div class="hero-inner">
       <div class="hero-copy">
         <p class="hero-kicker">Experimental quantum information science</p>
-        <h1>Wang Lab</h1>
+        <h1>Superconducting Qubit Toronto Lab</h1>
         <p class="hero-lede">Superconducting circuits for protecting, understanding, and directing quantum information.</p>
         <div class="hero-actions">
           <a class="button button-primary" href={withBase('/research/')}>Explore our research <span aria-hidden="true">↗</span></a>
           <a class="button button-quiet" href={withBase('/join/')}>Join us <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-      <figure class="hero-figure">
-        <img src={withBase('/images/research/passive-qec-wigner.png')} alt="Wigner-function visualization for autonomous quantum error correction." />
-        <figcaption>Engineered dissipation as a tool for protecting quantum states.</figcaption>
+    </div>
+  </section>
+
+  <section class="platform-band">
+    <div class="platform-inner">
+      <div>
+        <p class="section-marker">Superconducting quantum circuits</p>
+        <h2>Quantum systems built to be shaped.</h2>
+        <p>Superconducting circuits turn lithographically fabricated resonators and Josephson junctions into programmable quantum systems. Their strong interactions, fast control, and custom environments make it possible to study how quantum information is stored, lost, protected, and directed.</p>
+      </div>
+      <figure>
+        <img src={withBase('/images/lab/chen-with-fridge.jpg')} alt="Chen Wang beside a superconducting-circuit dilution refrigerator." loading="lazy" />
+        <figcaption>Experiments begin with the circuit and its environment.</figcaption>
       </figure>
     </div>
   </section>
@@ -73,28 +83,33 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
         <p>Our current team carries forward the people and questions that shaped the lab's first chapter, while opening space for new collaborations and new experiments.</p>
         <a class="button button-outline" href={withBase('/people/')}>Meet the group <span aria-hidden="true">↗</span></a>
       </div>
-      <img src={withBase('/images/group/group-photo-2023.jpg')} alt="The Wang Lab group in 2023." loading="lazy" />
+      <img src={withBase('/images/group/group-photo-2025.jpg')} alt="SQT Lab members outside the Physical Sciences Building at the University of Toronto." loading="lazy" />
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .home-hero { color: var(--white); background: var(--graphite); }
-  .hero-inner, .band-inner, .home-section, .history-inner {
+  .home-hero { color: var(--white); background-color: var(--graphite); background-image: var(--hero-image); background-position: center; background-size: cover; }
+  .hero-inner, .platform-inner, .band-inner, .home-section, .history-inner {
     max-width: var(--content); margin: 0 auto; padding-right: clamp(1.25rem, 4vw, 4rem); padding-left: clamp(1.25rem, 4vw, 4rem);
   }
-  .hero-inner { min-height: min(43rem, calc(100vh - 10rem)); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(15rem, 0.7fr); gap: 4rem; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
+  .hero-inner { min-height: min(39rem, calc(100vh - 5rem)); display: flex; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
+  .hero-copy { max-width: 43rem; }
   .hero-kicker { max-width: 20rem; margin: 0 0 1.75rem; color: var(--teal); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.35; text-transform: uppercase; }
-  .hero-copy h1 { margin: 0; font-family: var(--serif); font-size: 6rem; font-weight: 400; line-height: 0.9; letter-spacing: 0; }
+  .hero-copy h1 { max-width: 38rem; margin: 0; font-family: var(--serif); font-size: 4.8rem; font-weight: 400; line-height: 0.95; letter-spacing: 0; }
   .hero-lede { max-width: 32rem; margin: 1.8rem 0 0; color: #c8d5d0; font-size: 1.3rem; line-height: 1.45; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
   .button { min-height: 2.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.7rem 1rem; border: 1px solid transparent; font-size: 0.82rem; font-weight: 800; text-decoration: none; }
   .button-primary { color: var(--graphite); background: var(--teal); }
   .button-quiet { border-color: var(--line-dark); color: var(--white); }
   .button-outline { border-color: var(--teal); color: var(--teal); }
-  .hero-figure { margin: 0; padding: 1rem; border: 1px solid var(--line-dark); background: #172324; }
-  .hero-figure img { width: 100%; aspect-ratio: 1.45; display: block; object-fit: contain; background: #0d1415; }
-  .hero-figure figcaption { padding: 0.9rem 0 0.1rem; color: #a7b8b2; font-size: 0.72rem; line-height: 1.45; }
+  .platform-band { background: var(--white); }
+  .platform-inner { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(16rem, 1.05fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; padding-top: 6rem; padding-bottom: 6rem; }
+  .platform-inner h2 { max-width: 34rem; margin: 0.9rem 0 1.5rem; font-family: var(--serif); font-size: 3.1rem; font-weight: 400; line-height: 1.04; letter-spacing: 0; }
+  .platform-inner p:not(.section-marker) { max-width: 34rem; margin: 0; color: var(--muted); line-height: 1.7; }
+  .platform-inner figure { margin: 0; }
+  .platform-inner img { width: 100%; max-height: 32rem; display: block; object-fit: cover; object-position: 52% center; }
+  .platform-inner figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.75rem; }
   .toronto-band { color: var(--ink); background: var(--surface-alt); }
   .band-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: end; padding-top: 3rem; padding-bottom: 3.2rem; }
   .band-inner h2, .section-heading h2, .history-inner h2 { max-width: 42rem; margin: 0.9rem 0 0; font-family: var(--serif); font-size: 3.35rem; font-weight: 400; line-height: 1.02; letter-spacing: 0; }
@@ -113,17 +128,18 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
   .history-inner p:not(.section-marker) { max-width: 31rem; margin: 0 0 2rem; color: #afbfba; line-height: 1.7; }
   .history-inner img { width: 100%; display: block; border: 1px solid var(--line-dark); }
   @media (max-width: 900px) {
-    .hero-copy h1 { font-size: 4.5rem; }
-    .hero-inner, .band-inner, .history-inner { gap: 2.5rem; }
+    .hero-copy h1 { font-size: 3.9rem; }
+    .platform-inner, .band-inner, .history-inner { gap: 2.5rem; }
     .band-inner h2, .section-heading h2, .history-inner h2 { font-size: 2.7rem; }
     .news-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 700px) {
-    .hero-inner, .band-inner, .history-inner { grid-template-columns: 1fr; }
+    .platform-inner, .band-inner, .history-inner { grid-template-columns: 1fr; }
     .hero-inner { min-height: auto; padding-top: 4rem; }
-    .hero-copy h1 { font-size: 3.5rem; }
+    .hero-copy h1 { font-size: 2.85rem; }
     .hero-lede { font-size: 1.1rem; }
-    .hero-figure { max-width: 30rem; }
+    .platform-inner { padding-top: 4.5rem; padding-bottom: 4.5rem; }
+    .platform-inner h2 { font-size: 2.5rem; }
     .section-heading { grid-template-columns: 1fr; align-items: start; }
     .theme-grid { grid-template-columns: 1fr; gap: 2rem; }
   }

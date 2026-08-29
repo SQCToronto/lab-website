@@ -8,7 +8,7 @@ Replace the temporary Astro homepage at `https://sqctoronto.github.io/lab-websit
 
 The primary audiences are prospective graduate students and postdoctoral researchers, scientific collaborators, current group members, and readers looking for publications or an accessible overview of the lab's work.
 
-The voice is concise, technically accurate, and academic. It should explain experimental quantum information research without corporate marketing language or exaggerated claims. Research summaries may be accessible, but must preserve the scientific distinctions between passive, autonomous, and active error correction.
+The voice is concise, technically accurate, and academic. It should explain experimental quantum information research without corporate marketing language or exaggerated claims.
 
 ## Information Architecture
 

@@ -1,0 +1,161 @@
+---
+import { withBase } from '../lib/paths.mjs';
+
+interface Props {
+  theme: {
+    id: string;
+    title: string;
+    summary: string;
+    eyebrow: string;
+    image: string;
+    projects: { title: string; url: string }[];
+  };
+  index?: number;
+  compact?: boolean;
+}
+
+const { theme, index = 0, compact = false } = Astro.props;
+---
+
+<article class:list={['research-theme', { compact }]} id={theme.id}>
+  <div class="research-theme-copy">
+    <div class="theme-number">0{index + 1}</div>
+    <p class="section-marker">{theme.eyebrow}</p>
+    <h2>{theme.title}</h2>
+    <p class="theme-summary">{theme.summary}</p>
+    <ul class="project-links">
+      {theme.projects.map((project) => (
+        <li><a href={project.url}>{project.title}<span aria-hidden="true">↗</span></a></li>
+      ))}
+    </ul>
+  </div>
+  <figure class="research-theme-figure">
+    <img src={withBase(theme.image)} alt={theme.title + ' research figure'} loading={index > 0 ? 'lazy' : 'eager'} />
+  </figure>
+</article>
+
+<style>
+  .research-theme {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.85fr);
+    gap: clamp(2rem, 7vw, 7rem);
+    align-items: center;
+    padding: clamp(3.5rem, 8vw, 7rem) 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .research-theme-copy {
+    position: relative;
+  }
+
+  .theme-number {
+    margin-bottom: 1.4rem;
+    color: var(--coral);
+    font-family: var(--serif);
+    font-size: 1.4rem;
+  }
+
+  .research-theme h2 {
+    max-width: 34rem;
+    margin: 1rem 0 1.25rem;
+    font-family: var(--serif);
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.02;
+    letter-spacing: 0;
+  }
+
+  .theme-summary {
+    max-width: 35rem;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .project-links {
+    display: grid;
+    gap: 0.75rem;
+    margin: 2rem 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .project-links a {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 34rem;
+    padding: 0.7rem 0;
+    border-top: 1px solid var(--line);
+    color: var(--teal-dark);
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 700;
+  }
+
+  .project-links span {
+    flex: 0 0 auto;
+    color: var(--coral);
+    font-size: 1rem;
+  }
+
+  .research-theme-figure {
+    min-height: 15rem;
+    margin: 0;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--surface-alt);
+  }
+
+  .research-theme-figure img {
+    width: 100%;
+    height: auto;
+    max-height: 24rem;
+    display: block;
+    object-fit: contain;
+  }
+
+  .research-theme.compact {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 1.5rem 0 0;
+    border-top: 0;
+  }
+
+  .research-theme.compact .theme-number {
+    display: none;
+  }
+
+  .research-theme.compact h2 {
+    margin: 0.7rem 0;
+    font-family: var(--sans);
+    font-size: 1.35rem;
+    font-weight: 760;
+    line-height: 1.15;
+  }
+
+  .research-theme.compact .theme-summary {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .research-theme.compact .project-links,
+  .research-theme.compact .research-theme-figure {
+    display: none;
+  }
+
+  @media (max-width: 760px) {
+    .research-theme {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .research-theme h2 {
+      font-size: 2.35rem;
+    }
+  }
+</style>

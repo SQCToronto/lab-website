@@ -9,3 +9,13 @@ test('home build includes the shared identity and six base-safe destinations', a
     assert.match(html, new RegExp(`href="/lab-website/${route}/?"`));
   }
 });
+
+for (const [file, required] of [
+  ['dist/index.html', ['Launching in Toronto', 'Autonomous Quantum Protection', 'Passive Quantum Error Correction']],
+  ['dist/research/index.html', ['Decoherence in New Regimes', 'Hardware-Efficient Quantum Error Correction', 'Directional Open-System Dynamics']],
+]) {
+  test(`${file} contains its approved content`, async () => {
+    const html = await readFile(file, 'utf8');
+    for (const text of required) assert.match(html, new RegExp(text));
+  });
+}

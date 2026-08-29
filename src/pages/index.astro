@@ -1,35 +1,130 @@
 ---
+import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
+import ResearchTheme from '../components/ResearchTheme.astro';
+import NewsCard from '../components/NewsCard.astro';
+import { researchThemes } from '../data/research.mjs';
+import { withBase } from '../lib/paths.mjs';
+
+const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const highlights = news.filter((entry) => entry.data.category === 'paper').slice(0, 3);
 ---
 
 <BaseLayout title="Wang Lab" description="Experimental quantum information science with superconducting circuits at the University of Toronto." theme="dark">
-  <PageIntro
-    eyebrow="Experimental quantum information science"
-    title="Wang Lab"
-    description="We build and understand superconducting quantum systems that protect, control, and move quantum information."
-  />
-  <section class="shell-placeholder">
-    <p class="section-marker">Launching in Toronto</p>
-    <h2>A new chapter at the University of Toronto.</h2>
+  <section class="home-hero">
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <p class="hero-kicker">Experimental quantum information science</p>
+        <h1>Wang Lab</h1>
+        <p class="hero-lede">Superconducting circuits for protecting, understanding, and directing quantum information.</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href={withBase('/research/')}>Explore our research <span aria-hidden="true">↗</span></a>
+          <a class="button button-quiet" href={withBase('/join/')}>Join us <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <figure class="hero-figure">
+        <img src={withBase('/images/research/passive-qec-wigner.png')} alt="Wigner-function visualization for autonomous quantum error correction." />
+        <figcaption>Engineered dissipation as a tool for protecting quantum states.</figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <section class="toronto-band">
+    <div class="band-inner">
+      <div>
+        <p class="section-marker">Launching in Toronto · 2026</p>
+        <h2>A new chapter at the University of Toronto.</h2>
+      </div>
+      <p>After a decade of work at UMass Amherst, the lab is building its next generation of superconducting quantum experiments in Toronto.</p>
+    </div>
+  </section>
+
+  <section class="home-section themes-section">
+    <div class="section-heading">
+      <div>
+        <p class="section-marker">Research themes</p>
+        <h2>Quantum systems, shaped at the level of their dynamics.</h2>
+      </div>
+      <a class="text-link" href={withBase('/research/')}>All research <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="theme-grid">
+      {researchThemes.map((theme, index) => <ResearchTheme theme={theme} index={index} compact />)}
+    </div>
+  </section>
+
+  <section class="home-section updates-section">
+    <div class="section-heading updates-heading">
+      <div>
+        <p class="section-marker">Recent work</p>
+        <h2>Experiments and ideas from the group.</h2>
+      </div>
+      <a class="text-link" href={withBase('/news/')}>View all updates <span aria-hidden="true">↗</span></a>
+    </div>
+    <div class="news-grid">
+      {highlights.map((entry) => <NewsCard entry={entry} featured />)}
+    </div>
+  </section>
+
+  <section class="history-band">
+    <div class="history-inner">
+      <div>
+        <p class="section-marker">The group</p>
+        <h2>From Amherst to Toronto, still building together.</h2>
+        <p>Our current team carries forward the people and questions that shaped the lab's first chapter, while opening space for new collaborations and new experiments.</p>
+        <a class="button button-outline" href={withBase('/people/')}>Meet the group <span aria-hidden="true">↗</span></a>
+      </div>
+      <img src={withBase('/images/group/group-photo-2023.jpg')} alt="The Wang Lab group in 2023." loading="lazy" />
+    </div>
   </section>
 </BaseLayout>
 
 <style>
-  .shell-placeholder {
-    max-width: var(--content);
-    margin: 0 auto;
-    padding: 3rem clamp(1.25rem, 4vw, 4rem) 6rem;
-    color: var(--ink);
-    background: var(--surface);
+  .home-hero { color: var(--white); background: var(--graphite); }
+  .hero-inner, .band-inner, .home-section, .history-inner {
+    max-width: var(--content); margin: 0 auto; padding-right: clamp(1.25rem, 4vw, 4rem); padding-left: clamp(1.25rem, 4vw, 4rem);
   }
-
-  .shell-placeholder h2 {
-    max-width: 42rem;
-    margin: 1rem 0 0;
-    font-family: var(--serif);
-    font-size: clamp(2rem, 4vw, 3.6rem);
-    font-weight: 400;
-    line-height: 1.05;
+  .hero-inner { min-height: min(43rem, calc(100vh - 10rem)); display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(15rem, 0.7fr); gap: 4rem; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
+  .hero-kicker { max-width: 20rem; margin: 0 0 1.75rem; color: var(--teal); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.35; text-transform: uppercase; }
+  .hero-copy h1 { margin: 0; font-family: var(--serif); font-size: 6rem; font-weight: 400; line-height: 0.9; letter-spacing: 0; }
+  .hero-lede { max-width: 32rem; margin: 1.8rem 0 0; color: #c8d5d0; font-size: 1.3rem; line-height: 1.45; }
+  .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
+  .button { min-height: 2.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.7rem 1rem; border: 1px solid transparent; font-size: 0.82rem; font-weight: 800; text-decoration: none; }
+  .button-primary { color: var(--graphite); background: var(--teal); }
+  .button-quiet { border-color: var(--line-dark); color: var(--white); }
+  .button-outline { border-color: var(--teal); color: var(--teal); }
+  .hero-figure { margin: 0; padding: 1rem; border: 1px solid var(--line-dark); background: #172324; }
+  .hero-figure img { width: 100%; aspect-ratio: 1.45; display: block; object-fit: contain; background: #0d1415; }
+  .hero-figure figcaption { padding: 0.9rem 0 0.1rem; color: #a7b8b2; font-size: 0.72rem; line-height: 1.45; }
+  .toronto-band { color: var(--ink); background: var(--surface-alt); }
+  .band-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: end; padding-top: 3rem; padding-bottom: 3.2rem; }
+  .band-inner h2, .section-heading h2, .history-inner h2 { max-width: 42rem; margin: 0.9rem 0 0; font-family: var(--serif); font-size: 3.35rem; font-weight: 400; line-height: 1.02; letter-spacing: 0; }
+  .band-inner > p { max-width: 29rem; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.65; }
+  .home-section { padding-top: 6rem; padding-bottom: 6.5rem; }
+  .section-heading { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end; margin-bottom: 3rem; }
+  .section-heading h2 { max-width: 36rem; font-size: 3rem; }
+  .text-link { color: var(--teal-dark); font-size: 0.82rem; font-weight: 800; text-decoration: none; }
+  .text-link span { color: var(--coral); }
+  .theme-grid, .news-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem; }
+  .updates-section { background: var(--surface-alt); }
+  .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
+  .history-band { color: var(--white); background: var(--graphite-soft); }
+  .history-inner { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 4rem; align-items: center; padding-top: 6rem; padding-bottom: 6rem; }
+  .history-inner h2 { margin-bottom: 1.5rem; font-size: 3.2rem; }
+  .history-inner p:not(.section-marker) { max-width: 31rem; margin: 0 0 2rem; color: #afbfba; line-height: 1.7; }
+  .history-inner img { width: 100%; display: block; border: 1px solid var(--line-dark); }
+  @media (max-width: 900px) {
+    .hero-copy h1 { font-size: 4.5rem; }
+    .hero-inner, .band-inner, .history-inner { gap: 2.5rem; }
+    .band-inner h2, .section-heading h2, .history-inner h2 { font-size: 2.7rem; }
+    .news-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 700px) {
+    .hero-inner, .band-inner, .history-inner { grid-template-columns: 1fr; }
+    .hero-inner { min-height: auto; padding-top: 4rem; }
+    .hero-copy h1 { font-size: 3.5rem; }
+    .hero-lede { font-size: 1.1rem; }
+    .hero-figure { max-width: 30rem; }
+    .section-heading { grid-template-columns: 1fr; align-items: start; }
+    .theme-grid { grid-template-columns: 1fr; gap: 2rem; }
   }
 </style>

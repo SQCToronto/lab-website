@@ -1,0 +1,25 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ResearchTheme from '../components/ResearchTheme.astro';
+import { researchThemes } from '../data/research.mjs';
+---
+
+<BaseLayout title="Research" description="Four research themes from the Wang Lab at the University of Toronto.">
+  <PageIntro
+    eyebrow="Research"
+    title="Engineering the quantum environment."
+    description="We work across quantum error correction, decoherence, hardware-efficient architectures, and engineered open-system dynamics."
+  />
+  <section class="research-list">
+    {researchThemes.map((theme, index) => <ResearchTheme theme={theme} index={index} />)}
+  </section>
+</BaseLayout>
+
+<style>
+  .research-list {
+    max-width: var(--content);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 4vw, 4rem) 6rem;
+  }
+</style>

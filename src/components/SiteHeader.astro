@@ -1,0 +1,33 @@
+---
+import { withBase } from '../lib/paths.mjs';
+
+const links = [
+  { label: 'Research', path: '/research/' },
+  { label: 'People', path: '/people/' },
+  { label: 'Publications', path: '/publications/' },
+  { label: 'News', path: '/news/' },
+  { label: 'Join', path: '/join/' },
+];
+
+const currentPath = Astro.url.pathname;
+const isCurrent = (path) => currentPath === withBase(path) || currentPath === withBase(path).replace(/\/$/, '');
+---
+
+<header class="site-header">
+  <a class="wordmark" href={withBase('/')} aria-label="Wang Lab home">
+    <span class="wordmark-mark" aria-hidden="true">W</span>
+    <span>Wang Lab</span>
+  </a>
+  <nav class="desktop-nav" aria-label="Primary navigation">
+    {links.map((link) => (
+      <a href={withBase(link.path)} class:list={{ active: isCurrent(link.path) }}>{link.label}</a>
+    ))}
+  </nav>
+  <details class="mobile-nav">
+    <summary aria-label="Open navigation menu"><span aria-hidden="true"></span><span aria-hidden="true"></span></summary>
+    <nav aria-label="Mobile navigation">
+      <a href={withBase('/')}>Home</a>
+      {links.map((link) => <a href={withBase(link.path)}>{link.label}</a>)}
+    </nav>
+  </details>
+</header>

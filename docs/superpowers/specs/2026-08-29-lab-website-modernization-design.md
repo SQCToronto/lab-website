@@ -14,8 +14,8 @@ The voice is concise, technically accurate, and academic. It should explain expe
 
 The main navigation contains six destinations:
 
-1. **Home**: research-led hero, Toronto launch notice, three research themes, recent work, and latest group news.
-2. **Research**: quantum error correction and bosonic encodings; high-coherence superconducting qubits and gates; engineered open-system dynamics and nonreciprocity.
+1. **Home**: research-led hero, Toronto launch notice, four research themes, recent work, and latest group news.
+2. **Research**: four themes with selected project highlights and links to related publications.
 3. **People**: Chen Wang, all current students and postdoctoral associates from the UMass site carried forward as active members, undergraduate students, alumni, and selected group-history photographs.
 4. **Publications**: the complete publication record migrated from the UMass site and grouped by year.
 5. **News**: a chronological feed combining paper highlights, the Toronto move, group activities, arrivals, awards, and related updates.
@@ -48,6 +48,13 @@ The initial recent-work highlights are:
 - **Non-Markovian Relaxation Spectroscopy of Fluxonium Qubits**, *Nature Communications* 17, 3209 (2026).
 - **Hardware-Efficient Erasure Qubits With Superconducting Transmon Qutrits**, arXiv:2604.08672 (2026).
 
+The four research themes use the following public-facing language:
+
+1. **Autonomous Quantum Protection**: We use reservoir engineering and bosonic encodings to stabilize fragile quantum states and realize autonomous protection against dominant errors.
+2. **Decoherence in New Regimes**: We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.
+3. **Hardware-Efficient Quantum Error Correction**: We develop erasure qubits, efficient multi-qubit gates, and architectures that reduce the physical resources required for reliable quantum computation.
+4. **Directional Open-System Dynamics**: We engineer dissipation and nonreciprocity to control how quantum information and excitations flow through circuit-QED systems.
+
 The complete publication list and people roster are migrated from the current UMass site. Existing UMass funding or recruiting statements are not presented as current Toronto commitments unless they remain explicitly relevant.
 
 ## Content Model
@@ -57,7 +64,7 @@ Astro content collections provide the low-maintenance editing surface:
 - `src/content/news/`: one Markdown file per paper highlight or group update.
 - `src/content/people/`: one Markdown file per active member or alumnus.
 - `src/data/publications.ts`: structured publication records grouped by year.
-- `src/data/research.ts`: the three research themes and selected project highlights.
+- `src/data/research.ts`: the four research themes and selected project highlights.
 
 Each news entry requires a title, date, category, summary, and link when applicable. Images are required for featured paper highlights and optional for ordinary updates. Schemas reject incomplete or malformed entries at build time.
 

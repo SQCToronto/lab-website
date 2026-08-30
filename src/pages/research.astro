@@ -1,25 +1,92 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import PageIntro from '../components/PageIntro.astro';
 import ResearchTheme from '../components/ResearchTheme.astro';
 import { researchThemes } from '../data/research.mjs';
+import { withBase } from '../lib/paths.mjs';
 ---
 
 <BaseLayout title="Research" description="Four research themes from the Superconducting Qubit Toronto Lab at the University of Toronto.">
-  <PageIntro
-    eyebrow="Research"
-    title="Engineering the quantum environment."
-    description="We work across quantum error correction, decoherence, hardware-efficient architectures, and engineered open-system dynamics."
-  />
+  <section class="research-hero" style={{ '--fridge-image': `url(${withBase('/images/lab/Fridge-Dodo.jpg')})` }}>
+    <div class="research-hero-inner">
+      <p class="section-marker">Research</p>
+      <h1>Superconducting circuits as a quantum laboratory.</h1>
+      <div class="research-hero-copy">
+        <p>We make quantum devices from patterned aluminum films and Josephson junctions on sapphire, then cool them to about 10 millikelvin in a dilution refrigerator. At that temperature, electrical currents flow collectively and without resistance, producing controllable energy levels that can serve as artificial atoms.</p>
+        <p>Microwave electronics let us prepare, manipulate, and measure superpositions and entangled states with carefully shaped pulses. The combination of custom hardware, programmable control, and engineered dissipation gives us an experimental setting where both the quantum system and its environment can be designed.</p>
+        <p>That freedom has enabled milestones including a 2016 demonstration of a Schroedinger cat state shared between two boxes, and 2021 autonomous quantum error correction that protected a bosonic qubit through continuously engineered dynamics. Today, we build on those ideas to make quantum information more robust, more efficient to process, and more capable of moving in useful directions.</p>
+      </div>
+    </div>
+  </section>
   <section class="research-list">
     {researchThemes.map((theme, index) => <ResearchTheme theme={theme} index={index} />)}
   </section>
 </BaseLayout>
 
 <style>
+  .research-hero {
+    min-height: calc(100svh - 5rem);
+    color: var(--white);
+    background-color: #101817;
+    background-image: var(--fridge-image);
+    background-position: center;
+    background-size: cover;
+    background-blend-mode: multiply;
+  }
+
+  .research-hero-inner,
   .research-list {
     max-width: var(--content);
     margin: 0 auto;
-    padding: 0 clamp(1.25rem, 4vw, 4rem) 6rem;
+    padding-right: clamp(1.25rem, 4vw, 4rem);
+    padding-left: clamp(1.25rem, 4vw, 4rem);
+  }
+
+  .research-hero-inner {
+    min-height: calc(100svh - 5rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+  }
+
+  .research-hero h1 {
+    max-width: 42rem;
+    margin: 1.1rem 0 2rem;
+    font-family: var(--serif);
+    font-size: 3.6rem;
+    font-weight: 400;
+    line-height: 1.03;
+    letter-spacing: 0;
+  }
+
+  .research-hero-copy {
+    max-width: 43rem;
+    color: #d9e5e1;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .research-hero-copy p {
+    margin: 0;
+  }
+
+  .research-hero-copy p + p {
+    margin-top: 1rem;
+  }
+
+  .research-list {
+    padding-top: 1rem;
+    padding-bottom: 4.5rem;
+  }
+
+  @media (max-width: 700px) {
+    .research-hero h1 {
+      font-size: 2.55rem;
+    }
+
+    .research-hero-copy {
+      font-size: 0.95rem;
+    }
   }
 </style>

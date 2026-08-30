@@ -55,7 +55,7 @@ test('uses the approved figures for the first three research themes', () => {
   assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
   assert.equal(decoherence?.image, '/images/research/tls-charge-states-figure-1a.png');
   assert.equal(decoherence?.imageDisplay, 'figure-1a');
-  assert.equal(errorCorrection?.image, '/images/lab/g-f-erasure-qubit.jpg');
+  assert.equal(errorCorrection?.image, '/images/research/g-f-erasure-qubit.jpg');
 });
 
 test('includes the complete migrated publication eras', () => {

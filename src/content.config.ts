@@ -11,9 +11,15 @@ const news = defineCollection({
     summary: z.string(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),
+    images: z.array(z.string()).min(1).optional(),
+    imageAlts: z.array(z.string()).min(1).optional(),
     externalUrl: z.string().url().optional(),
-  }).refine((entry) => entry.category !== 'paper' || Boolean(entry.image && entry.imageAlt && entry.externalUrl), {
-    message: 'Paper highlights require image, imageAlt, and externalUrl',
+  }).refine((entry) => {
+    const hasSingleImage = Boolean(entry.image && entry.imageAlt);
+    const hasImageSet = Boolean(entry.images && entry.imageAlts && entry.images.length === entry.imageAlts.length);
+    return entry.category !== 'paper' || Boolean(entry.externalUrl && (hasSingleImage || hasImageSet));
+  }, {
+    message: 'Paper highlights require an image, alt text, and external URL',
   }),
 });
 

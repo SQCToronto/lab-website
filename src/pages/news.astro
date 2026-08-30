@@ -6,14 +6,14 @@ import NewsCard from '../components/NewsCard.astro';
 
 const news = (await getCollection('news')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const launch = news.find((entry) => entry.data.category === 'move');
-const updates = news.filter((entry) => entry !== launch);
+const updates = news.filter((entry) => entry !== launch && entry.data.category !== 'paper');
 ---
 
 <BaseLayout title="News" description="News and recent work from the Superconducting Qubit Toronto Lab.">
   <PageIntro
     eyebrow="News"
     title="A living record of the lab."
-    description="Paper highlights, group updates, and the beginning of SQT Lab's Toronto chapter."
+    description="Milestones, people, and the work of establishing SQT Lab's Toronto chapter."
   />
 
   {launch && (

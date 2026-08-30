@@ -8,7 +8,7 @@ export const people = [
     detail: 'Experimental quantum information science. B.S. Physics, Peking University, 2006; Ph.D. Physics, Cornell University, 2012; postdoctoral associate, Yale University, 2012-2016.',
     destination: 'chen.wang@utoronto.ca | MP1023B | 416-946-5858',
   },
-  { id: 'sean-van-geldern', name: 'Sean van Geldern', role: 'Postdoctoral Associate', group: 'postdoctoral', image: '/images/people/sean-van-geldern.jpeg', imagePosition: '50% 35%' },
+  { id: 'sean-van-geldern', name: 'Sean van Geldern', role: 'Postdoctoral Associate', group: 'postdoctoral', image: '/images/people/sean-van-geldern.jpeg', imagePosition: '50% 42%' },
   { id: 'baojie-liu', name: 'Baojie Liu', role: 'Research Scientist', group: 'research-scientist', image: '/images/people/baojie-liu.jpg' },
   { id: 'tanvir-masum', name: 'Tanvir Masum', role: 'Graduate student', group: 'graduate', image: '/images/people/tanvir-masum.jpg' },
   { id: 'hanzhe-xi', name: 'Hanzhe Xi', role: 'Graduate student', group: 'graduate', image: '/images/people/hanzhe-xi.jpg' },

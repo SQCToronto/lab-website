@@ -10,6 +10,8 @@ interface Props {
       summary: string;
       image?: string;
       imageAlt?: string;
+      images?: string[];
+      imageAlts?: string[];
       externalUrl?: string;
     };
   };
@@ -17,12 +19,18 @@ interface Props {
 }
 
 const { entry, featured = false } = Astro.props;
-const { title, date, category, summary, image, imageAlt, externalUrl } = entry.data;
+const { title, date, category, summary, image, imageAlt, images, imageAlts, externalUrl } = entry.data;
 const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+const media = images?.length ? images.map((src, index) => ({ src, alt: imageAlts?.[index] ?? '' })) : image ? [{ src: image, alt: imageAlt ?? '' }] : [];
 ---
 
 <article class:list={['news-card', { featured }]}>
-  {image && <img src={withBase(image)} alt={imageAlt ?? ''} loading="lazy" />}
+  {media.length === 1 && <img src={withBase(media[0].src)} alt={media[0].alt} loading="lazy" />}
+  {media.length > 1 && (
+    <div class="news-card-media news-card-media-collage" aria-label={`Photos for ${title}`}>
+      {media.map(({ src, alt }) => <img src={withBase(src)} alt={alt} loading="lazy" />)}
+    </div>
+  )}
   <div class="news-card-body">
     <div class="news-card-meta"><span>{category}</span><time datetime={date.toISOString()}>{dateLabel}</time></div>
     <h3>{title}</h3>
@@ -39,12 +47,29 @@ const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'sh
     background: var(--white);
   }
 
-  .news-card > img {
+  .news-card > img,
+  .news-card-media {
     width: 100%;
-    aspect-ratio: 16 / 8;
+    aspect-ratio: 4 / 3;
     display: block;
-    object-fit: cover;
     background: var(--surface-alt);
+  }
+
+  .news-card > img,
+  .news-card-media img {
+    object-fit: cover;
+  }
+
+  .news-card-media-collage {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+  }
+
+  .news-card-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
   }
 
   .news-card-body {

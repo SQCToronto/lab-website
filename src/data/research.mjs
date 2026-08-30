@@ -45,7 +45,7 @@ export const researchThemes = [
     title: 'Hardware-Efficient Quantum Error Correction',
     summary: 'We develop erasure qubits, efficient multi-qubit gates, and architectures that reduce the physical resources required for reliable quantum computation.',
     eyebrow: 'Error correction',
-    image: '/images/lab/g-f-erasure-qubit.jpg',
+    image: '/images/research/g-f-erasure-qubit.jpg',
     imageAlt: 'Circuit and energy-level schematic for a superconducting transmon erasure-qubit architecture.',
     projects: [
       {

@@ -7,7 +7,7 @@ const news = defineCollection({
   schema: z.object({
     title: z.string(),
     date: z.coerce.date(),
-    category: z.enum(['paper', 'move', 'group', 'award', 'people']),
+    category: z.enum(['paper', 'move', 'group', 'award', 'people', 'lab']),
     summary: z.string(),
     image: z.string().optional(),
     imageAlt: z.string().optional(),

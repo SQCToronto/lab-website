@@ -8,12 +8,32 @@ import { withBase } from '../lib/paths.mjs';
 const principalInvestigator = people.find((person) => person.group === 'principal-investigator');
 const currentPeople = people.filter((person) => person.group !== 'alumni' && person.group !== 'principal-investigator');
 const currentGroups = [
-  { label: 'Postdoctoral associates', group: 'postdoctoral' },
-  { label: 'Research scientist', group: 'research-scientist' },
-  { label: 'Graduate students', group: 'graduate' },
-  { label: 'Undergraduate students', group: 'undergraduate' },
+  {
+    label: 'Postdoctoral associates and research scientist',
+    members: [
+      ...currentPeople.filter((person) => person.group === 'research-scientist'),
+      ...currentPeople.filter((person) => person.group === 'postdoctoral'),
+    ],
+  },
+  { label: 'Graduate students', members: currentPeople.filter((person) => person.group === 'graduate') },
+  { label: 'Undergraduate students', members: currentPeople.filter((person) => person.group === 'undergraduate') },
 ];
 const alumni = people.filter((person) => person.group === 'alumni');
+const alumniGroups = [
+  { label: 'Former graduate students', members: alumni.filter((person) => person.role === 'Graduate student') },
+  { label: 'Former postdoctoral associates', members: alumni.filter((person) => person.role === 'Postdoctoral associate') },
+  { label: 'Former undergraduate students', members: alumni.filter((person) => person.role === 'Undergraduate student') },
+];
+const groupHistory = [
+  { year: '2017', image: '/images/group/Group-photo-2017.jpg' },
+  { year: '2019', image: '/images/group/Group-photo-2019.jpg' },
+  { year: '2021', image: '/images/group/Group-photo-2021.jpg' },
+  { year: '2023', image: '/images/group/group-photo-2023.jpg' },
+  { year: '2023', image: '/images/group/Group-photo-2023b.jpg' },
+  { year: '2025', image: '/images/group/group-photo-2025.jpg' },
+  { year: '2026', image: '/images/group/Group-photo-2026.jpg' },
+  { year: '2026', image: '/images/group/Group-photo-2026b.jpg' },
+];
 ---
 
 <BaseLayout title="People" description="Current members and alumni of the Superconducting Qubit Toronto Lab.">
@@ -31,12 +51,9 @@ const alumni = people.filter((person) => person.group === 'alumni');
   </section>
 
   <section class="people-section current-section">
-    <div class="section-heading">
-      <p class="section-marker">Current members</p>
-      <h2>One group, several ways into the work.</h2>
-    </div>
+    <p class="section-marker">Current members</p>
     {currentGroups.map((section) => {
-      const members = currentPeople.filter((person) => person.group === section.group);
+      const members = section.members;
       return members.length > 0 && (
         <div class="people-group">
           <h2>{section.label}</h2>
@@ -52,7 +69,12 @@ const alumni = people.filter((person) => person.group === 'alumni');
         <p class="section-marker">Alumni</p>
         <h2>A growing scientific family.</h2>
       </div>
-      <div class="alumni-grid">{alumni.map((person) => <PersonEntry person={person} />)}</div>
+      {alumniGroups.map((section) => section.members.length > 0 && (
+        <div class="alumni-group">
+          <h3>{section.label}</h3>
+          <div class="alumni-grid">{section.members.map((person) => <PersonEntry person={person} portrait={false} />)}</div>
+        </div>
+      ))}
     </div>
   </section>
 
@@ -63,10 +85,14 @@ const alumni = people.filter((person) => person.group === 'alumni');
         <h2>From our first chapter to the next.</h2>
         <p>These photographs document the people and shared work that brought the lab to Toronto.</p>
       </div>
-      <figure>
-        <img src={withBase('/images/group/group-photo-2025.jpg')} alt="SQT Lab members outside the Physical Sciences Building at the University of Toronto." loading="lazy" />
-        <figcaption>SQT Lab, University of Toronto, 2025</figcaption>
-      </figure>
+      <div class="history-gallery">
+        {groupHistory.map((photo) => (
+          <figure>
+            <img src={withBase(photo.image)} alt={`Group photograph from the SQT Lab archive, ${photo.year}.`} loading="lazy" />
+            <figcaption>SQT Lab archive · {photo.year}</figcaption>
+          </figure>
+        ))}
+      </div>
     </div>
   </section>
 </BaseLayout>
@@ -128,7 +154,7 @@ const alumni = people.filter((person) => person.group === 'alumni');
   .people-group > h2 {
     margin: 0 0 0.75rem;
     color: var(--teal-dark);
-    font-size: 0.78rem;
+    font-size: 0.82rem;
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -155,6 +181,19 @@ const alumni = people.filter((person) => person.group === 'alumni');
     column-gap: 4rem;
   }
 
+  .alumni-group {
+    margin-top: 3rem;
+  }
+
+  .alumni-group h3 {
+    margin: 0 0 0.75rem;
+    color: var(--teal-dark);
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
   .group-history {
     color: var(--white);
     background: var(--graphite-soft);
@@ -162,9 +201,9 @@ const alumni = people.filter((person) => person.group === 'alumni');
 
   .group-history-inner {
     display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
     gap: 4rem;
-    align-items: center;
+    align-items: start;
     padding-top: 6rem;
     padding-bottom: 6rem;
   }
@@ -176,17 +215,25 @@ const alumni = people.filter((person) => person.group === 'alumni');
     line-height: 1.7;
   }
 
-  .group-history figure {
+  .history-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .history-gallery figure {
     margin: 0;
   }
 
-  .group-history img {
+  .history-gallery img {
     width: 100%;
+    aspect-ratio: 4 / 3;
     display: block;
     border: 1px solid var(--line-dark);
+    object-fit: cover;
   }
 
-  .group-history figcaption {
+  .history-gallery figcaption {
     margin-top: 0.75rem;
     color: #afbfba;
     font-size: 0.75rem;
@@ -205,6 +252,10 @@ const alumni = people.filter((person) => person.group === 'alumni');
 
     .people-grid,
     .alumni-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .history-gallery {
       grid-template-columns: 1fr;
     }
   }

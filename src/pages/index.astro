@@ -16,26 +16,12 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
       <div class="hero-copy">
         <p class="hero-kicker">Experimental quantum information science</p>
         <h1>Superconducting Qubit Toronto Lab</h1>
-        <p class="hero-lede">Superconducting circuits for protecting, understanding, and directing quantum information.</p>
+        <p class="hero-lede">Superconducting circuits for protecting, processing, and directing quantum information.</p>
         <div class="hero-actions">
           <a class="button button-primary" href={withBase('/research/')}>Explore our research <span aria-hidden="true">↗</span></a>
           <a class="button button-quiet" href={withBase('/join/')}>Join us <span aria-hidden="true">↗</span></a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <section class="platform-band">
-    <div class="platform-inner">
-      <div>
-        <p class="section-marker">Superconducting quantum circuits</p>
-        <h2>Quantum systems built to be shaped.</h2>
-        <p>Superconducting circuits turn lithographically fabricated resonators and Josephson junctions into programmable quantum systems. Their strong interactions, fast control, and custom environments make it possible to study how quantum information is stored, lost, protected, and directed.</p>
-      </div>
-      <figure>
-        <img src={withBase('/images/lab/chen-with-fridge.jpg')} alt="Chen Wang beside a superconducting-circuit dilution refrigerator." loading="lazy" />
-        <figcaption>Experiments begin with the circuit and its environment.</figcaption>
-      </figure>
     </div>
   </section>
 
@@ -50,12 +36,15 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
   </section>
 
   <section class="home-section themes-section">
-    <div class="section-heading">
+    <div class="themes-heading">
       <div>
         <p class="section-marker">Research themes</p>
         <h2>Quantum systems, shaped at the level of their dynamics.</h2>
       </div>
-      <a class="text-link" href={withBase('/research/')}>All research <span aria-hidden="true">↗</span></a>
+      <div class="themes-introduction">
+        <p>Superconducting quantum circuits are electrical devices made from patterned metals and Josephson junctions, then cooled close to absolute zero so that quantum behavior can be precisely measured and controlled. We use them as a flexible experimental platform: to learn how quantum information is lost, to protect it from errors, and to guide it through useful operations and networks.</p>
+        <a class="text-link" href={withBase('/research/')}>All research <span aria-hidden="true">↗</span></a>
+      </div>
     </div>
     <div class="theme-grid">
       {researchThemes.map((theme, index) => <ResearchTheme theme={theme} index={index} compact />)}
@@ -90,12 +79,12 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
 
 <style>
   .home-hero { color: var(--white); background-color: var(--graphite); background-image: var(--hero-image); background-position: center; background-size: cover; }
-  .hero-inner, .platform-inner, .band-inner, .home-section, .history-inner {
+  .hero-inner, .band-inner, .home-section, .history-inner {
     max-width: var(--content); margin: 0 auto; padding-right: clamp(1.25rem, 4vw, 4rem); padding-left: clamp(1.25rem, 4vw, 4rem);
   }
   .hero-inner { min-height: min(39rem, calc(100vh - 5rem)); display: flex; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
   .hero-copy { max-width: 43rem; }
-  .hero-kicker { max-width: 20rem; margin: 0 0 1.75rem; color: var(--teal); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.35; text-transform: uppercase; }
+  .hero-kicker { max-width: 20rem; margin: 0 0 1.75rem; color: var(--teal); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.35; text-transform: uppercase; }
   .hero-copy h1 { max-width: 38rem; margin: 0; font-family: var(--serif); font-size: 4.8rem; font-weight: 400; line-height: 0.95; letter-spacing: 0; }
   .hero-lede { max-width: 32rem; margin: 1.8rem 0 0; color: #c8d5d0; font-size: 1.3rem; line-height: 1.45; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
@@ -103,23 +92,20 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
   .button-primary { color: var(--graphite); background: var(--teal); }
   .button-quiet { border-color: var(--line-dark); color: var(--white); }
   .button-outline { border-color: var(--teal); color: var(--teal); }
-  .platform-band { background: var(--white); }
-  .platform-inner { display: grid; grid-template-columns: minmax(0, 0.95fr) minmax(16rem, 1.05fr); gap: clamp(2.5rem, 7vw, 7rem); align-items: center; padding-top: 6rem; padding-bottom: 6rem; }
-  .platform-inner h2 { max-width: 34rem; margin: 0.9rem 0 1.5rem; font-family: var(--serif); font-size: 3.1rem; font-weight: 400; line-height: 1.04; letter-spacing: 0; }
-  .platform-inner p:not(.section-marker) { max-width: 34rem; margin: 0; color: var(--muted); line-height: 1.7; }
-  .platform-inner figure { margin: 0; }
-  .platform-inner img { width: 100%; max-height: 32rem; display: block; object-fit: cover; object-position: 52% center; }
-  .platform-inner figcaption { margin-top: 0.75rem; color: var(--muted); font-size: 0.75rem; }
   .toronto-band { color: var(--ink); background: var(--surface-alt); }
   .band-inner { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 4rem; align-items: end; padding-top: 3rem; padding-bottom: 3.2rem; }
   .band-inner h2, .section-heading h2, .history-inner h2 { max-width: 42rem; margin: 0.9rem 0 0; font-family: var(--serif); font-size: 3.35rem; font-weight: 400; line-height: 1.02; letter-spacing: 0; }
   .band-inner > p { max-width: 29rem; margin: 0; color: var(--muted); font-size: 1rem; line-height: 1.65; }
   .home-section { padding-top: 6rem; padding-bottom: 6.5rem; }
   .section-heading { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: end; margin-bottom: 3rem; }
+  .themes-heading { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(18rem, 0.9fr); gap: clamp(2rem, 7vw, 6rem); align-items: end; margin-bottom: 2.25rem; }
+  .themes-introduction { max-width: 32rem; }
+  .themes-introduction p { margin: 0; color: var(--muted); line-height: 1.7; }
+  .themes-introduction .text-link { display: inline-block; margin-top: 1.2rem; }
   .section-heading h2 { max-width: 36rem; font-size: 3rem; }
   .text-link { color: var(--teal-dark); font-size: 0.82rem; font-weight: 800; text-decoration: none; }
   .text-link span { color: var(--coral); }
-  .theme-grid, .news-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 3rem 4rem; }
+  .theme-grid, .news-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 2rem 3rem; }
   .updates-section { background: var(--surface-alt); }
   .news-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; }
   .history-band { color: var(--white); background: var(--graphite-soft); }
@@ -129,17 +115,15 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
   .history-inner img { width: 100%; display: block; border: 1px solid var(--line-dark); }
   @media (max-width: 900px) {
     .hero-copy h1 { font-size: 3.9rem; }
-    .platform-inner, .band-inner, .history-inner { gap: 2.5rem; }
+    .band-inner, .history-inner { gap: 2.5rem; }
     .band-inner h2, .section-heading h2, .history-inner h2 { font-size: 2.7rem; }
     .news-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 700px) {
-    .platform-inner, .band-inner, .history-inner { grid-template-columns: 1fr; }
+    .band-inner, .history-inner, .themes-heading { grid-template-columns: 1fr; }
     .hero-inner { min-height: auto; padding-top: 4rem; }
     .hero-copy h1 { font-size: 2.85rem; }
     .hero-lede { font-size: 1.1rem; }
-    .platform-inner { padding-top: 4.5rem; padding-bottom: 4.5rem; }
-    .platform-inner h2 { font-size: 2.5rem; }
     .section-heading { grid-template-columns: 1fr; align-items: start; }
     .theme-grid { grid-template-columns: 1fr; gap: 2rem; }
   }

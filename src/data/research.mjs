@@ -4,7 +4,8 @@ export const researchThemes = [
     title: 'Autonomous Quantum Protection',
     summary: 'We use reservoir engineering and bosonic encodings to stabilize fragile quantum states and realize autonomous protection against dominant errors.',
     eyebrow: 'Stabilization',
-    image: '/images/research/pair-coherent-states.png',
+    image: '/images/research/passive-qec-wigner.png',
+    imageAlt: 'Wigner-function reconstruction of a passively protected bosonic quantum state.',
     projects: [
       {
         title: 'Passive Quantum Error Correction of Photon Loss at Breakeven',
@@ -25,7 +26,9 @@ export const researchThemes = [
     title: 'Decoherence in New Regimes',
     summary: 'We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.',
     eyebrow: 'Spectroscopy',
-    image: '/images/research/fluxonium-decoherence.png',
+    image: '/images/research/tls-charge-states-figure-1a.png',
+    imageAlt: 'Repeated spectroscopy of a superconducting qubit revealing discrete charge-state fluctuations, adapted from Figure 1a of Liu et al., arXiv:2401.12183.',
+    imageDisplay: 'figure-1a',
     projects: [
       {
         title: 'Non-Markovian Relaxation Spectroscopy of Fluxonium Qubits',
@@ -42,7 +45,8 @@ export const researchThemes = [
     title: 'Hardware-Efficient Quantum Error Correction',
     summary: 'We develop erasure qubits, efficient multi-qubit gates, and architectures that reduce the physical resources required for reliable quantum computation.',
     eyebrow: 'Error correction',
-    image: '/images/lab/chen-with-fridge.jpg',
+    image: '/images/lab/g-f-erasure-qubit.jpg',
+    imageAlt: 'Circuit and energy-level schematic for a superconducting transmon erasure-qubit architecture.',
     projects: [
       {
         title: 'Hardware-Efficient Erasure Qubits With Superconducting Transmon Qutrits',
@@ -60,6 +64,7 @@ export const researchThemes = [
     summary: 'We engineer dissipation and nonreciprocity to control how quantum information and excitations flow through circuit-QED systems.',
     eyebrow: 'Nonreciprocity',
     image: '/images/research/nonreciprocity.png',
+    imageAlt: 'Circuit-QED diagram illustrating directional open-system dynamics.',
     projects: [
       {
         title: 'Dispersive Nonreciprocity between a Qubit and a Cavity',

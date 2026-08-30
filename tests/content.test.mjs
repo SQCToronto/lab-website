@@ -46,10 +46,16 @@ test('keeps former members only in alumni with their next destinations', () => {
   }
 });
 
-test('places the 2023 pair-coherent-state result in autonomous quantum protection', () => {
+test('uses the approved figures for the first three research themes', () => {
   const protection = researchThemes.find((theme) => theme.id === 'autonomous-quantum-protection');
-  assert.equal(protection?.image, '/images/research/pair-coherent-states.png');
+  const decoherence = researchThemes.find((theme) => theme.id === 'decoherence-in-new-regimes');
+  const errorCorrection = researchThemes.find((theme) => theme.id === 'hardware-efficient-quantum-error-correction');
+
+  assert.equal(protection?.image, '/images/research/passive-qec-wigner.png');
   assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
+  assert.equal(decoherence?.image, '/images/research/tls-charge-states-figure-1a.png');
+  assert.equal(decoherence?.imageDisplay, 'figure-1a');
+  assert.equal(errorCorrection?.image, '/images/lab/g-f-erasure-qubit.jpg');
 });
 
 test('includes the complete migrated publication eras', () => {

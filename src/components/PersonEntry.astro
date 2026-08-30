@@ -6,22 +6,24 @@ interface Props {
     name: string;
     role: string;
     image?: string;
+    imagePosition?: string;
     detail?: string;
     destination?: string;
   };
   featured?: boolean;
+  portrait?: boolean;
 }
 
-const { person, featured = false } = Astro.props;
+const { person, featured = false, portrait = true } = Astro.props;
 const initials = person.name.split(' ').map((part) => part[0]).slice(0, 2).join('');
 ---
 
-<article class:list={['person-entry', { featured }]}>
-  <div class="person-portrait">
+<article class:list={['person-entry', { featured, portraitless: !portrait }]}>
+  {portrait && <div class="person-portrait">
     {person.image
-      ? <img src={withBase(person.image)} alt={'Portrait of ' + person.name} loading={featured ? 'eager' : 'lazy'} />
+      ? <img src={withBase(person.image)} alt={'Portrait of ' + person.name} loading={featured ? 'eager' : 'lazy'} style={person.imagePosition ? `object-position: ${person.imagePosition}` : undefined} />
       : <span aria-label={'Initials for ' + person.name}>{initials}</span>}
-  </div>
+  </div>}
   <div class="person-copy">
     <h3>{person.name}</h3>
     <p class="person-role">{person.role}</p>
@@ -45,6 +47,10 @@ const initials = person.name.split(' ').map((part) => part[0]).slice(0, 2).join(
     gap: 2rem;
     padding: 0;
     border-top: 0;
+  }
+
+  .person-entry.portraitless {
+    grid-template-columns: 1fr;
   }
 
   .person-portrait {

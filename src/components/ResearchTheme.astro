@@ -8,6 +8,8 @@ interface Props {
     summary: string;
     eyebrow: string;
     image: string;
+    imageAlt: string;
+    imageDisplay?: string;
     projects: { title: string; url: string }[];
   };
   index?: number;
@@ -29,8 +31,8 @@ const { theme, index = 0, compact = false } = Astro.props;
       ))}
     </ul>
   </div>
-  <figure class="research-theme-figure">
-    <img src={withBase(theme.image)} alt={theme.title + ' research figure'} loading={index > 0 ? 'lazy' : 'eager'} />
+  <figure class:list={['research-theme-figure', theme.imageDisplay]}>
+    <img src={withBase(theme.image)} alt={theme.imageAlt} loading={index > 0 ? 'lazy' : 'eager'} />
   </figure>
 </article>
 
@@ -117,6 +119,18 @@ const { theme, index = 0, compact = false } = Astro.props;
     max-height: 24rem;
     display: block;
     object-fit: contain;
+  }
+
+  .research-theme-figure.figure-1a {
+    aspect-ratio: 2.1 / 1;
+    min-height: 0;
+  }
+
+  .research-theme-figure.figure-1a img {
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    object-position: center top;
   }
 
   .research-theme.compact {

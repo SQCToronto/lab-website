@@ -26,9 +26,9 @@ export const researchThemes = [
     id: 'decoherence-in-new-regimes',
     title: 'Decoherence in New Regimes',
     summary: 'We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.',
-    detail: 'Superconducting qubits can lose coherence through microscopic defects, charge and flux fluctuations, quasiparticles, radiation, and other environmental modes. We develop spectroscopy, including two-timescale relaxometry, to isolate individual channels such as long-lived two-level systems and determine how their slow dynamics reshape qubit relaxation. The goal is to identify the mechanisms that limit emerging devices and guide their mitigation.',
+    detail: 'Superconducting qubits can lose coherence through microscopic defects, charge and flux fluctuations, quasiparticles, radiation, and other environmental modes. We develop two-timescale relaxometry and joint mapping of charge-parity and TLS states to isolate individual channels and determine how their slow dynamics reshape qubit relaxation. The goal is to identify the mechanisms that limit emerging devices and guide their mitigation.',
     eyebrow: 'Spectroscopy',
-    image: '/images/research/tls-charge-states-three-panel.png',
+    image: '/images/research/tls-charge-states-clean.png',
     imageAlt: 'Repeated spectroscopy revealing discrete charge-state fluctuations above a charge-sensitive energy-level diagram and a schematic of a coherent two-level system in a Josephson-junction tunnel barrier.',
     projects: [
       {

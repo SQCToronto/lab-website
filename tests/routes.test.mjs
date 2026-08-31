@@ -31,7 +31,7 @@ test('home presents the accessible superconducting-circuit introduction and lab 
 
 for (const [file, required] of [
   ['dist/index.html', ['Launching in Toronto', 'Autonomous Quantum Protection', 'Passive Quantum Error Correction']],
-  ['dist/research/index.html', ['Decoherence in New Regimes', 'Gates for Hardware-efficient QEC', 'Directional Open-System Dynamics', 'turn photon loss into a correctable process', 'two-timescale relaxometry', 'flag damaging relaxation events', 'control the direction of quantum interactions', 'images/research/g-f-erasure-qubit.jpg', 'images/research/tls-charge-states-composite.png', 'images/research/nonreciprocity-clean.png', 'images/lab/Fridge-Dodo.jpg', 'two boxes', 'autonomous quantum error correction']],
+  ['dist/research/index.html', ['Decoherence in New Regimes', 'Gates for Hardware-efficient QEC', 'Directional Open-System Dynamics', 'turn photon loss into a correctable process', 'quasiparticles, radiation', 'two-timescale relaxometry', 'flag damaging relaxation events', 'control the direction of quantum interactions', 'images/research/g-f-erasure-qubit.jpg', 'images/research/tls-charge-states-three-panel.png', 'images/research/nonreciprocity-clean.png', 'images/lab/Fridge-Dodo.jpg', 'research-hero-media--scaled', 'two boxes', 'autonomous quantum error correction']],
 ]) {
   test(`${file} contains its approved content`, async () => {
     const html = await readFile(file, 'utf8');

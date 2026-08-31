@@ -16,7 +16,7 @@ import { withBase } from '../lib/paths.mjs';
         <p>That freedom has enabled milestones including a 2016 demonstration of a Schroedinger cat state shared between two boxes, and 2021 autonomous quantum error correction that protected a bosonic qubit through continuously engineered dynamics. Today, we build on those ideas to make quantum information more robust, more efficient to process, and more capable of moving in useful directions.</p>
       </div>
     </div>
-    <figure class="research-hero-media">
+    <figure class="research-hero-media research-hero-media--scaled">
       <img src={withBase('/images/lab/Fridge-Dodo.jpg')} alt="Dilution refrigerator and measurement setup used for superconducting-circuit experiments." loading="eager" />
     </figure>
   </section>
@@ -30,8 +30,8 @@ import { withBase } from '../lib/paths.mjs';
     min-height: calc(100svh - 5rem);
     color: var(--white);
     background-color: #101817;
-    display: grid;
-    grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
+    position: relative;
+    overflow: hidden;
   }
 
   .research-list {
@@ -42,8 +42,7 @@ import { withBase } from '../lib/paths.mjs';
   }
 
   .research-hero-content {
-    max-width: calc(var(--content) / 2 + 4rem);
-    margin-left: auto;
+    width: min(58%, 47rem);
     padding: 4rem clamp(1.25rem, 5vw, 5rem);
     min-height: calc(100svh - 5rem);
     display: flex;
@@ -52,8 +51,13 @@ import { withBase } from '../lib/paths.mjs';
   }
 
   .research-hero-media {
-    min-height: 100%;
+    width: 34vw;
+    height: 65%;
     margin: 0;
+    position: absolute;
+    top: 50%;
+    right: clamp(1.25rem, 4vw, 4rem);
+    transform: translateY(-50%);
     overflow: hidden;
     background: #d9e5e1;
   }
@@ -98,16 +102,25 @@ import { withBase } from '../lib/paths.mjs';
 
   @media (max-width: 700px) {
     .research-hero {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
     }
 
     .research-hero-media {
+      width: 65%;
       min-height: auto;
+      height: auto;
       aspect-ratio: 4 / 5;
+      margin: 2rem auto 0;
+      position: relative;
+      top: auto;
+      right: auto;
+      transform: none;
       order: -1;
     }
 
     .research-hero-content {
+      width: 100%;
       min-height: auto;
       margin: 0;
       padding-top: 3.5rem;

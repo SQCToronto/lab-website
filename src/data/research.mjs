@@ -26,10 +26,10 @@ export const researchThemes = [
     id: 'decoherence-in-new-regimes',
     title: 'Decoherence in New Regimes',
     summary: 'We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.',
-    detail: 'Microscopic two-level systems can retain energy and charge information for milliseconds, making a qubit\'s relaxation depend on the state and history of its environment. We use offset-charge-sensitive transmons and low-frequency fluxonium to resolve individual TLS, determine how they couple to qubits, and measure their slow dynamics with two-timescale relaxometry. These measurements connect coherent defects in Josephson-junction oxides to charge noise and reveal how long-lived environmental memory can limit protected superconducting qubits.',
+    detail: 'Superconducting qubits can lose coherence through microscopic defects, charge and flux fluctuations, quasiparticles, radiation, and other environmental modes. We develop spectroscopy, including two-timescale relaxometry, to isolate individual channels such as long-lived two-level systems and determine how their slow dynamics reshape qubit relaxation. The goal is to identify the mechanisms that limit emerging devices and guide their mitigation.',
     eyebrow: 'Spectroscopy',
-    image: '/images/research/tls-charge-states-composite.png',
-    imageAlt: 'Repeated spectroscopy revealing discrete charge-state fluctuations above a schematic of a coherent two-level system in a Josephson-junction tunnel barrier.',
+    image: '/images/research/tls-charge-states-three-panel.png',
+    imageAlt: 'Repeated spectroscopy revealing discrete charge-state fluctuations above a charge-sensitive energy-level diagram and a schematic of a coherent two-level system in a Josephson-junction tunnel barrier.',
     projects: [
       {
         title: 'Non-Markovian Relaxation Spectroscopy of Fluxonium Qubits',

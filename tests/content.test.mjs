@@ -54,7 +54,8 @@ test('uses the approved figures for the first three research themes', () => {
 
   assert.equal(protection?.image, '/images/research/passive-qec-wigner.png');
   assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
-  assert.equal(decoherence?.image, '/images/research/tls-charge-states-composite.png');
+  assert.equal(decoherence?.image, '/images/research/tls-charge-states-three-panel.png');
+  assert.match(decoherence?.detail ?? '', /quasiparticles, radiation/);
   assert.match(decoherence?.detail ?? '', /two-timescale relaxometry/);
   assert.equal(decoherence?.images, undefined);
   assert.equal(errorCorrection?.image, '/images/research/g-f-erasure-qubit.jpg');

@@ -6,8 +6,8 @@ import { withBase } from '../lib/paths.mjs';
 ---
 
 <BaseLayout title="Research" description="Four research themes from the Superconducting Qubit Toronto Lab at the University of Toronto.">
-  <section class="research-hero" style={{ '--fridge-image': `url(${withBase('/images/lab/Fridge-Dodo.jpg')})` }}>
-    <div class="research-hero-inner">
+  <section class="research-hero">
+    <div class="research-hero-content">
       <p class="section-marker">Research</p>
       <h1>Superconducting circuits as a quantum laboratory.</h1>
       <div class="research-hero-copy">
@@ -16,6 +16,9 @@ import { withBase } from '../lib/paths.mjs';
         <p>That freedom has enabled milestones including a 2016 demonstration of a Schroedinger cat state shared between two boxes, and 2021 autonomous quantum error correction that protected a bosonic qubit through continuously engineered dynamics. Today, we build on those ideas to make quantum information more robust, more efficient to process, and more capable of moving in useful directions.</p>
       </div>
     </div>
+    <figure class="research-hero-media">
+      <img src={withBase('/images/lab/Fridge-Dodo.jpg')} alt="Dilution refrigerator and measurement setup used for superconducting-circuit experiments." loading="eager" />
+    </figure>
   </section>
   <section class="research-list">
     {researchThemes.map((theme, index) => <ResearchTheme theme={theme} index={index} />)}
@@ -27,13 +30,10 @@ import { withBase } from '../lib/paths.mjs';
     min-height: calc(100svh - 5rem);
     color: var(--white);
     background-color: #101817;
-    background-image: var(--fridge-image);
-    background-position: center;
-    background-size: cover;
-    background-blend-mode: multiply;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.05fr);
   }
 
-  .research-hero-inner,
   .research-list {
     max-width: var(--content);
     margin: 0 auto;
@@ -41,13 +41,29 @@ import { withBase } from '../lib/paths.mjs';
     padding-left: clamp(1.25rem, 4vw, 4rem);
   }
 
-  .research-hero-inner {
+  .research-hero-content {
+    max-width: calc(var(--content) / 2 + 4rem);
+    margin-left: auto;
+    padding: 4rem clamp(1.25rem, 5vw, 5rem);
     min-height: calc(100svh - 5rem);
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+  }
+
+  .research-hero-media {
+    min-height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: #d9e5e1;
+  }
+
+  .research-hero-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
   }
 
   .research-hero h1 {
@@ -81,6 +97,23 @@ import { withBase } from '../lib/paths.mjs';
   }
 
   @media (max-width: 700px) {
+    .research-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .research-hero-media {
+      min-height: auto;
+      aspect-ratio: 4 / 5;
+      order: -1;
+    }
+
+    .research-hero-content {
+      min-height: auto;
+      margin: 0;
+      padding-top: 3.5rem;
+      padding-bottom: 4rem;
+    }
+
     .research-hero h1 {
       font-size: 2.55rem;
     }

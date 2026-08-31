@@ -26,17 +26,10 @@ export const researchThemes = [
     id: 'decoherence-in-new-regimes',
     title: 'Decoherence in New Regimes',
     summary: 'We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.',
-    detail: 'New circuit designs make it possible to resolve individual defects, charge fluctuations, and other microscopic processes that are usually hidden inside an average coherence time. By tracking these signatures across frequency, time, and device design, we learn which mechanisms limit performance and how future qubits can avoid them.',
+    detail: 'Microscopic two-level systems can retain energy and charge information for milliseconds, making a qubit\'s relaxation depend on the state and history of its environment. We use offset-charge-sensitive transmons and low-frequency fluxonium to resolve individual TLS, determine how they couple to qubits, and measure their slow dynamics with two-timescale relaxometry. These measurements connect coherent defects in Josephson-junction oxides to charge noise and reveal how long-lived environmental memory can limit protected superconducting qubits.',
     eyebrow: 'Spectroscopy',
-    images: [
-      '/images/research/tls-charge-states-figure-1.png',
-      '/images/research/tls-charge-states-figure-2.png',
-    ],
-    imageAlts: [
-      'Repeated spectroscopy of a superconducting qubit revealing discrete charge-state fluctuations, from Figure 1 of Liu et al., arXiv:2401.12183.',
-      'Schematic of a two-level system in a Josephson junction tunnel barrier, from Figure 2 of Liu et al., arXiv:2401.12183.',
-    ],
-    imageDisplay: 'figure-pair',
+    image: '/images/research/tls-charge-states-composite.png',
+    imageAlt: 'Repeated spectroscopy revealing discrete charge-state fluctuations above a schematic of a coherent two-level system in a Josephson-junction tunnel barrier.',
     projects: [
       {
         title: 'Non-Markovian Relaxation Spectroscopy of Fluxonium Qubits',
@@ -73,7 +66,7 @@ export const researchThemes = [
     summary: 'We engineer dissipation and nonreciprocity to control how quantum information and excitations flow through circuit-QED systems.',
     detail: 'Open quantum systems need not simply lose information: with tailored couplings and dissipation, they can control the direction of quantum interactions and stabilize useful dynamics. We use circuit-QED networks to explore nonreciprocity, protected transfer, and new ways of routing excitations through quantum hardware.',
     eyebrow: 'Nonreciprocity',
-    image: '/images/research/nonreciprocity.png',
+    image: '/images/research/nonreciprocity-clean.png',
     imageAlt: 'Circuit-QED diagram illustrating directional open-system dynamics.',
     projects: [
       {

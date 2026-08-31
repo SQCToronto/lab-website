@@ -54,12 +54,11 @@ test('uses the approved figures for the first three research themes', () => {
 
   assert.equal(protection?.image, '/images/research/passive-qec-wigner.png');
   assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
-  assert.deepEqual(decoherence?.images, [
-    '/images/research/tls-charge-states-figure-1.png',
-    '/images/research/tls-charge-states-figure-2.png',
-  ]);
-  assert.equal(decoherence?.imageDisplay, 'figure-pair');
+  assert.equal(decoherence?.image, '/images/research/tls-charge-states-composite.png');
+  assert.match(decoherence?.detail ?? '', /two-timescale relaxometry/);
+  assert.equal(decoherence?.images, undefined);
   assert.equal(errorCorrection?.image, '/images/research/g-f-erasure-qubit.jpg');
+  assert.equal(researchThemes.find((theme) => theme.id === 'directional-open-system-dynamics')?.image, '/images/research/nonreciprocity-clean.png');
 });
 
 test('includes the complete migrated publication eras', () => {

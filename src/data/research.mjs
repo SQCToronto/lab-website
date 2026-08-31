@@ -3,6 +3,7 @@ export const researchThemes = [
     id: 'autonomous-quantum-protection',
     title: 'Autonomous Quantum Protection',
     summary: 'We use reservoir engineering and bosonic encodings to stabilize fragile quantum states and realize autonomous protection against dominant errors.',
+    detail: 'We combine bosonic codes with driven, dissipative circuits so that the hardware can turn photon loss into a correctable process. The goal is a logical qubit whose protection is continuously supplied by the engineered environment, reducing the need to repeatedly measure errors and apply external feedback.',
     eyebrow: 'Stabilization',
     image: '/images/research/passive-qec-wigner.png',
     imageAlt: 'Wigner-function reconstruction of a passively protected bosonic quantum state.',
@@ -25,10 +26,17 @@ export const researchThemes = [
     id: 'decoherence-in-new-regimes',
     title: 'Decoherence in New Regimes',
     summary: 'We investigate two-level systems and other microscopic loss mechanisms in emerging superconducting circuits and previously unexplored parameter regimes.',
+    detail: 'New circuit designs make it possible to resolve individual defects, charge fluctuations, and other microscopic processes that are usually hidden inside an average coherence time. By tracking these signatures across frequency, time, and device design, we learn which mechanisms limit performance and how future qubits can avoid them.',
     eyebrow: 'Spectroscopy',
-    image: '/images/research/tls-charge-states-figure-1a.png',
-    imageAlt: 'Repeated spectroscopy of a superconducting qubit revealing discrete charge-state fluctuations, adapted from Figure 1a of Liu et al., arXiv:2401.12183.',
-    imageDisplay: 'figure-1a',
+    images: [
+      '/images/research/tls-charge-states-figure-1.png',
+      '/images/research/tls-charge-states-figure-2.png',
+    ],
+    imageAlts: [
+      'Repeated spectroscopy of a superconducting qubit revealing discrete charge-state fluctuations, from Figure 1 of Liu et al., arXiv:2401.12183.',
+      'Schematic of a two-level system in a Josephson junction tunnel barrier, from Figure 2 of Liu et al., arXiv:2401.12183.',
+    ],
+    imageDisplay: 'figure-pair',
     projects: [
       {
         title: 'Non-Markovian Relaxation Spectroscopy of Fluxonium Qubits',
@@ -42,8 +50,9 @@ export const researchThemes = [
   },
   {
     id: 'hardware-efficient-quantum-error-correction',
-    title: 'Hardware-Efficient Quantum Error Correction',
+    title: 'Gates for Hardware-efficient QEC',
     summary: 'We develop erasure qubits, efficient multi-qubit gates, and architectures that reduce the physical resources required for reliable quantum computation.',
+    detail: 'We design qubits and gates around the errors hardware actually produces. Erasure encodings use extra energy levels to flag damaging relaxation events, while efficient multi-qubit gates and compact architectures aim to lower the overhead needed to turn physical devices into useful error-corrected processors.',
     eyebrow: 'Error correction',
     image: '/images/research/g-f-erasure-qubit.jpg',
     imageAlt: 'Circuit and energy-level schematic for a superconducting transmon erasure-qubit architecture.',
@@ -62,6 +71,7 @@ export const researchThemes = [
     id: 'directional-open-system-dynamics',
     title: 'Directional Open-System Dynamics',
     summary: 'We engineer dissipation and nonreciprocity to control how quantum information and excitations flow through circuit-QED systems.',
+    detail: 'Open quantum systems need not simply lose information: with tailored couplings and dissipation, they can control the direction of quantum interactions and stabilize useful dynamics. We use circuit-QED networks to explore nonreciprocity, protected transfer, and new ways of routing excitations through quantum hardware.',
     eyebrow: 'Nonreciprocity',
     image: '/images/research/nonreciprocity.png',
     imageAlt: 'Circuit-QED diagram illustrating directional open-system dynamics.',

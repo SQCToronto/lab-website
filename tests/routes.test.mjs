@@ -13,8 +13,13 @@ test('home build includes the SQT Lab identity and six base-safe destinations', 
 
 test('home presents the accessible superconducting-circuit introduction and lab address', async () => {
   const html = await readFile('dist/index.html', 'utf8');
-  assert.match(html, /Superconducting circuits for protecting, processing, and directing quantum information\./);
-  assert.match(html, /Superconducting quantum circuits are electrical devices/);
+  assert.match(html, /Superconducting Qubit Lab/);
+  assert.match(html, /@ Toronto/);
+  assert.match(html, /home-hero-image/);
+  assert.match(html, /leading platforms for quantum computing/);
+  assert.match(html, /href="\/lab-website\/research\/"[^>]*>Explore research/);
+  assert.match(html, /href="\/lab-website\/research\/"[^>]*>View research/);
+  assert.doesNotMatch(html, /href="\/lab-website\/news\/"[^>]*>View all updates/);
   assert.match(html, /images\/hero\/Front-page-image\.jpg/);
   assert.match(html, /images\/group\/Group-photo-2026\.jpg/);
   assert.match(html, /Building together\./);
@@ -26,7 +31,7 @@ test('home presents the accessible superconducting-circuit introduction and lab 
 
 for (const [file, required] of [
   ['dist/index.html', ['Launching in Toronto', 'Autonomous Quantum Protection', 'Passive Quantum Error Correction']],
-  ['dist/research/index.html', ['Decoherence in New Regimes', 'Hardware-Efficient Quantum Error Correction', 'Directional Open-System Dynamics', 'images/research/g-f-erasure-qubit.jpg', 'images/lab/Fridge-Dodo.jpg', 'two boxes', 'autonomous quantum error correction']],
+  ['dist/research/index.html', ['Decoherence in New Regimes', 'Gates for Hardware-efficient QEC', 'Directional Open-System Dynamics', 'turn photon loss into a correctable process', 'resolve individual defects', 'flag damaging relaxation events', 'control the direction of quantum interactions', 'images/research/g-f-erasure-qubit.jpg', 'images/research/tls-charge-states-figure-1.png', 'images/research/tls-charge-states-figure-2.png', 'images/lab/Fridge-Dodo.jpg', 'two boxes', 'autonomous quantum error correction']],
 ]) {
   test(`${file} contains its approved content`, async () => {
     const html = await readFile(file, 'utf8');
@@ -44,6 +49,21 @@ test('people page carries the updated roster and alumni', async () => {
   assert.doesNotMatch(html, /images\/people\/shruti-shirol\.jpg/);
   for (const image of ['Group-photo-2017.jpg', 'Group-photo-2019.jpg', 'Group-photo-2021.jpg', 'group-photo-2023.jpg', 'Group-photo-2023b.jpg', 'Group-photo-2026.jpg', 'Group-photo-2026b.jpg']) assert.match(html, new RegExp(image));
   assert.doesNotMatch(html, /group-photo-2025\.jpg/);
+  assert.doesNotMatch(html, /SQT Lab archive/);
+  for (const [image, caption] of [
+    ['Group-photo-2026b.jpg', 'Group mini-golf outing, 2026.'],
+    ['Group-photo-2023b.jpg', 'Group escape game, 2023.'],
+    ['APS-Physics-escape-game-2025.jpg', 'LabEscape at APS Physics, 2025.'],
+    ['Hiking-Sugarloaf-2024.jpg', 'Group hike at Sugarloaf Mountain, 2024.'],
+    ['Quantum-chess-at-Chen-house-2023.jpg', 'Quantum chess at Chen\'s house, 2023.'],
+  ]) {
+    assert.match(html, new RegExp(image));
+    assert.match(html, new RegExp(caption.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
+  }
+  const reverseChronologicalImages = ['Group-photo-2026b.jpg', 'Group-photo-2026.jpg', 'APS-Physics-escape-game-2025.jpg', 'Hiking-Sugarloaf-2024.jpg', 'Quantum-chess-at-Chen-house-2023.jpg', 'Group-photo-2023b.jpg', 'group-photo-2023.jpg', 'Group-photo-2021.jpg', 'Group-photo-2019.jpg', 'Group-photo-2017.jpg'];
+  for (let index = 1; index < reverseChronologicalImages.length; index += 1) {
+    assert.ok(html.indexOf(reverseChronologicalImages[index - 1]) < html.indexOf(reverseChronologicalImages[index]));
+  }
 });
 
 test('publications page preserves recent and landmark work', async () => {
@@ -56,6 +76,8 @@ test('news page records the Toronto launch and the current lab updates without d
   for (const text of ['A living record of the lab.', 'University of Toronto', 'Exciting Progress in Toronto Lab Construction', 'late October', 'Sean van Geldern', 'Shruti Shirol', 'Q-CTRL']) assert.match(html, new RegExp(text));
   for (const image of ['Lab-construction-August.jpeg', 'Sean-cake.jpg', 'Sean-defense.jpg', 'Shruti-defense.jpg']) assert.match(html, new RegExp(image));
   for (const text of ['Passive Quantum Error Correction of Photon Loss at Breakeven', 'Hardware-Efficient Erasure Qubits With Superconducting Transmon Qutrits', 'Non-Markovian Relaxation Spectroscopy']) assert.doesNotMatch(html, new RegExp(text));
+  assert.match(html, /figure-fit-contain/);
+  assert.match(html, /Shruti-defense\.jpg/);
 });
 
 test('join page points applicants to Toronto', async () => {

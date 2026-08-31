@@ -10,9 +10,10 @@ test('publishes the four approved research themes', () => {
   assert.deepEqual(researchThemes.map(({ title }) => title), [
     'Autonomous Quantum Protection',
     'Decoherence in New Regimes',
-    'Hardware-Efficient Quantum Error Correction',
+    'Gates for Hardware-efficient QEC',
     'Directional Open-System Dynamics',
   ]);
+  assert.ok(researchThemes.every((theme) => theme.detail && theme.detail !== theme.summary));
 });
 
 test('publishes the current SQT Lab roster with updated roles', () => {
@@ -53,8 +54,11 @@ test('uses the approved figures for the first three research themes', () => {
 
   assert.equal(protection?.image, '/images/research/passive-qec-wigner.png');
   assert.ok(protection?.projects.some((project) => project.url.includes('PRXQuantum.4.020319')));
-  assert.equal(decoherence?.image, '/images/research/tls-charge-states-figure-1a.png');
-  assert.equal(decoherence?.imageDisplay, 'figure-1a');
+  assert.deepEqual(decoherence?.images, [
+    '/images/research/tls-charge-states-figure-1.png',
+    '/images/research/tls-charge-states-figure-2.png',
+  ]);
+  assert.equal(decoherence?.imageDisplay, 'figure-pair');
   assert.equal(errorCorrection?.image, '/images/research/g-f-erasure-qubit.jpg');
 });
 
@@ -66,7 +70,7 @@ test('includes the complete migrated publication eras', () => {
 
 test('all declared images are stored locally', async () => {
   const paths = [
-    ...researchThemes.map(({ image }) => image),
+    ...researchThemes.flatMap(({ image, images = [] }) => [image, ...images].filter(Boolean)),
     ...people.flatMap(({ image }) => image ? [image] : []),
   ];
 

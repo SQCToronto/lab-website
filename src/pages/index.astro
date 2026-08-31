@@ -11,11 +11,12 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
 ---
 
 <BaseLayout title="Superconducting Qubit Toronto Lab" description="Experimental quantum information science with superconducting circuits at the University of Toronto." theme="dark">
-  <section class="home-hero" style={{ '--hero-image': `url(${withBase('/images/hero/Front-page-image.jpg')})` }}>
+  <section class="home-hero">
+    <img class="home-hero-image" src={withBase('/images/hero/Front-page-image.jpg')} alt="Illustration of a dilution refrigerator and superconducting circuit-QED experiments." loading="eager" />
     <div class="hero-inner">
       <div class="hero-copy">
         <p class="hero-kicker">Experimental quantum information science</p>
-        <h1>Superconducting Qubit Toronto Lab</h1>
+        <h1><span class="hero-title">Superconducting Qubit Lab</span><span class="hero-location">@ Toronto</span></h1>
         <p class="hero-lede">Superconducting circuits for protecting, processing, and directing quantum information.</p>
         <div class="hero-actions">
           <a class="button button-primary" href={withBase('/research/')}>Explore our research <span aria-hidden="true">↗</span></a>
@@ -42,8 +43,8 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
         <h2>Quantum systems, shaped at the level of their dynamics.</h2>
       </div>
       <div class="themes-introduction">
-        <p>Superconducting quantum circuits are electrical devices made from patterned metals and Josephson junctions, then cooled close to absolute zero so that quantum behavior can be precisely measured and controlled. We use them as a flexible experimental platform: to learn how quantum information is lost, to protect it from errors, and to guide it through useful operations and networks.</p>
-        <a class="text-link" href={withBase('/research/')}>All research <span aria-hidden="true">↗</span></a>
+        <p>Superconducting qubits are one of the leading platforms for quantum computing, with active development across both academia and industry. Their combination of engineered quantum circuits, precise microwave control, and strong light-matter interactions provides an unusually flexible setting for quantum science. We use this circuit-QED toolbox to study how quantum information can be protected, manipulated, and transported, and to develop new approaches to quantum hardware.</p>
+        <a class="text-link" href={withBase('/research/')}>Explore research <span aria-hidden="true">↗</span></a>
       </div>
     </div>
     <div class="theme-grid">
@@ -57,7 +58,7 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
         <p class="section-marker">Recent work</p>
         <h2>Experiments and ideas from the group.</h2>
       </div>
-      <a class="text-link" href={withBase('/news/')}>View all updates <span aria-hidden="true">↗</span></a>
+      <a class="text-link" href={withBase('/research/')}>View research <span aria-hidden="true">↗</span></a>
     </div>
     <div class="news-grid">
       {highlights.map((entry) => <NewsCard entry={entry} featured />)}
@@ -78,14 +79,16 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
 </BaseLayout>
 
 <style>
-  .home-hero { color: var(--white); background-color: var(--graphite); background-image: var(--hero-image); background-position: center; background-size: cover; }
+  .home-hero { position: relative; aspect-ratio: 2 / 1; color: var(--white); background: var(--graphite); overflow: hidden; }
+  .home-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: contain; }
   .hero-inner, .band-inner, .home-section, .history-inner {
     max-width: var(--content); margin: 0 auto; padding-right: clamp(1.25rem, 4vw, 4rem); padding-left: clamp(1.25rem, 4vw, 4rem);
   }
-  .hero-inner { min-height: min(39rem, calc(100vh - 5rem)); display: flex; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
+  .hero-inner { position: relative; z-index: 1; min-height: 100%; display: flex; align-items: center; padding-top: 4rem; padding-bottom: 4.5rem; }
   .hero-copy { max-width: 43rem; }
   .hero-kicker { max-width: 20rem; margin: 0 0 1.75rem; color: var(--teal); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; line-height: 1.35; text-transform: uppercase; }
-  .hero-copy h1 { max-width: 38rem; margin: 0; font-family: var(--serif); font-size: 4.8rem; font-weight: 400; line-height: 0.95; letter-spacing: 0; }
+  .hero-copy h1 { max-width: 43rem; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.35em; margin: 0; font-family: var(--serif); font-size: 4.8rem; font-weight: 400; line-height: 0.95; letter-spacing: 0; }
+  .hero-location { color: #c8d5d0; font-family: var(--sans); font-size: 0.4em; font-weight: 700; line-height: 1.1; }
   .hero-lede { max-width: 32rem; margin: 1.8rem 0 0; color: #c8d5d0; font-size: 1.3rem; line-height: 1.45; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 2.2rem; }
   .button { min-height: 2.8rem; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; padding: 0.7rem 1rem; border: 1px solid transparent; font-size: 0.82rem; font-weight: 800; text-decoration: none; }
@@ -121,7 +124,9 @@ const highlights = news.filter((entry) => entry.data.category === 'paper').slice
   }
   @media (max-width: 700px) {
     .band-inner, .history-inner, .themes-heading { grid-template-columns: 1fr; }
-    .hero-inner { min-height: auto; padding-top: 4rem; }
+    .home-hero { aspect-ratio: auto; display: flex; flex-direction: column; }
+    .home-hero-image { position: relative; height: auto; aspect-ratio: 2 / 1; object-fit: contain; }
+    .hero-inner { min-height: auto; background: var(--graphite); padding-top: 3rem; }
     .hero-copy h1 { font-size: 2.85rem; }
     .hero-lede { font-size: 1.1rem; }
     .section-heading { grid-template-columns: 1fr; align-items: start; }

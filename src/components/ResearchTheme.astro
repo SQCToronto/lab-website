@@ -6,9 +6,12 @@ interface Props {
     id: string;
     title: string;
     summary: string;
+    detail?: string;
     eyebrow: string;
-    image: string;
-    imageAlt: string;
+    image?: string;
+    imageAlt?: string;
+    images?: string[];
+    imageAlts?: string[];
     imageDisplay?: string;
     projects: { title: string; url: string }[];
   };
@@ -17,6 +20,12 @@ interface Props {
 }
 
 const { theme, index = 0, compact = false } = Astro.props;
+const description = compact ? theme.summary : theme.detail ?? theme.summary;
+const figures = theme.images?.length
+  ? theme.images.map((image, figureIndex) => ({ image, alt: theme.imageAlts?.[figureIndex] ?? '' }))
+  : theme.image
+    ? [{ image: theme.image, alt: theme.imageAlt ?? '' }]
+    : [];
 ---
 
 <article class:list={['research-theme', { compact }]} id={theme.id}>
@@ -24,16 +33,22 @@ const { theme, index = 0, compact = false } = Astro.props;
     <div class="theme-number">0{index + 1}</div>
     <p class="section-marker">{theme.eyebrow}</p>
     <h2>{theme.title}</h2>
-    <p class="theme-summary">{theme.summary}</p>
+    <p class="theme-summary">{description}</p>
     <ul class="project-links">
       {theme.projects.map((project) => (
         <li><a href={project.url}>{project.title}<span aria-hidden="true">↗</span></a></li>
       ))}
     </ul>
   </div>
-  <figure class:list={['research-theme-figure', theme.imageDisplay]}>
-    <img src={withBase(theme.image)} alt={theme.imageAlt} loading={index > 0 ? 'lazy' : 'eager'} />
-  </figure>
+  {figures.length > 0 && (
+    <div class:list={['research-theme-figures', theme.imageDisplay]}>
+      {figures.map((figure, figureIndex) => (
+        <figure class="research-theme-figure">
+          <img src={withBase(figure.image)} alt={figure.alt} loading={index > 0 || figureIndex > 0 ? 'lazy' : 'eager'} />
+        </figure>
+      ))}
+    </div>
+  )}
 </article>
 
 <style>
@@ -103,6 +118,11 @@ const { theme, index = 0, compact = false } = Astro.props;
     font-size: 1rem;
   }
 
+  .research-theme-figures {
+    display: grid;
+    gap: 1rem;
+  }
+
   .research-theme-figure {
     min-height: 15rem;
     margin: 0;
@@ -121,12 +141,12 @@ const { theme, index = 0, compact = false } = Astro.props;
     object-fit: contain;
   }
 
-  .research-theme-figure.figure-1a {
+  .research-theme-figures.figure-1a .research-theme-figure {
     aspect-ratio: 2.1 / 1;
     min-height: 0;
   }
 
-  .research-theme-figure.figure-1a img {
+  .research-theme-figures.figure-1a img {
     height: 100%;
     max-height: none;
     object-fit: cover;
@@ -158,7 +178,7 @@ const { theme, index = 0, compact = false } = Astro.props;
   }
 
   .research-theme.compact .project-links,
-  .research-theme.compact .research-theme-figure {
+  .research-theme.compact .research-theme-figures {
     display: none;
   }
 

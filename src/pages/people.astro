@@ -25,13 +25,16 @@ const alumniGroups = [
   { label: 'Former undergraduate students', members: alumni.filter((person) => person.role === 'Undergraduate student') },
 ];
 const groupHistory = [
-  { year: '2017', image: '/images/group/Group-photo-2017.jpg' },
-  { year: '2019', image: '/images/group/Group-photo-2019.jpg' },
-  { year: '2021', image: '/images/group/Group-photo-2021.jpg' },
-  { year: '2023', image: '/images/group/group-photo-2023.jpg' },
-  { year: '2023', image: '/images/group/Group-photo-2023b.jpg' },
-  { year: '2026', image: '/images/group/Group-photo-2026.jpg' },
-  { year: '2026', image: '/images/group/Group-photo-2026b.jpg' },
+  { year: '2026', image: '/images/group/Group-photo-2026b.jpg', caption: 'Group mini-golf outing, 2026.' },
+  { year: '2026', image: '/images/group/Group-photo-2026.jpg', caption: 'Group photo outside the lab building, 2026.' },
+  { year: '2025', image: '/images/group/APS-Physics-escape-game-2025.jpg', caption: 'LabEscape at APS Physics, 2025.' },
+  { year: '2024', image: '/images/group/Hiking-Sugarloaf-2024.jpg', caption: 'Group hike at Sugarloaf Mountain, 2024.' },
+  { year: '2023', image: '/images/group/Quantum-chess-at-Chen-house-2023.jpg', caption: "Quantum chess at Chen's house, 2023." },
+  { year: '2023', image: '/images/group/Group-photo-2023b.jpg', caption: 'Group escape game, 2023.' },
+  { year: '2023', image: '/images/group/group-photo-2023.jpg', caption: 'Group photo in the lab, 2023.' },
+  { year: '2021', image: '/images/group/Group-photo-2021.jpg', caption: 'Group photo outside the lab, 2021.' },
+  { year: '2019', image: '/images/group/Group-photo-2019.jpg', caption: 'Group photo outside the lab, 2019.' },
+  { year: '2017', image: '/images/group/Group-photo-2017.jpg', caption: 'Group photo in the lab, 2017.' },
 ];
 ---
 
@@ -79,7 +82,7 @@ const groupHistory = [
 
   <section class="group-history">
     <div class="people-section group-history-inner">
-      <div>
+      <div class="group-history-heading">
         <p class="section-marker">Group history</p>
         <h2>From our first chapter to the next.</h2>
         <p>These photographs document the people and shared work that brought the lab to Toronto.</p>
@@ -87,8 +90,8 @@ const groupHistory = [
       <div class="history-gallery">
         {groupHistory.map((photo) => (
           <figure>
-            <img src={withBase(photo.image)} alt={`Group photograph from the SQT Lab archive, ${photo.year}.`} loading="lazy" />
-            <figcaption>SQT Lab archive · {photo.year}</figcaption>
+            <img src={withBase(photo.image)} alt={photo.caption} loading="lazy" />
+            <figcaption>{photo.caption}</figcaption>
           </figure>
         ))}
       </div>
@@ -199,12 +202,12 @@ const groupHistory = [
   }
 
   .group-history-inner {
-    display: grid;
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-    gap: 4rem;
-    align-items: start;
     padding-top: 6rem;
     padding-bottom: 6rem;
+  }
+
+  .group-history-heading {
+    max-width: 42rem;
   }
 
   .group-history p:not(.section-marker) {
@@ -216,8 +219,9 @@ const groupHistory = [
 
   .history-gallery {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.25rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 3rem;
   }
 
   .history-gallery figure {

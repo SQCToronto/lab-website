@@ -12,6 +12,7 @@ interface Props {
       imageAlt?: string;
       images?: string[];
       imageAlts?: string[];
+      imageFit?: 'cover' | 'contain';
       externalUrl?: string;
     };
   };
@@ -19,12 +20,12 @@ interface Props {
 }
 
 const { entry, featured = false } = Astro.props;
-const { title, date, category, summary, image, imageAlt, images, imageAlts, externalUrl } = entry.data;
+const { title, date, category, summary, image, imageAlt, images, imageAlts, imageFit, externalUrl } = entry.data;
 const dateLabel = date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
 const media = images?.length ? images.map((src, index) => ({ src, alt: imageAlts?.[index] ?? '' })) : image ? [{ src: image, alt: imageAlt ?? '' }] : [];
 ---
 
-<article class:list={['news-card', { featured }]}>
+<article class:list={['news-card', { featured, 'figure-fit-contain': imageFit === 'contain' }]}>
   {media.length === 1 && <img src={withBase(media[0].src)} alt={media[0].alt} loading="lazy" />}
   {media.length > 1 && (
     <div class="news-card-media news-card-media-collage" aria-label={`Photos for ${title}`}>
@@ -58,6 +59,11 @@ const media = images?.length ? images.map((src, index) => ({ src, alt: imageAlts
   .news-card > img,
   .news-card-media img {
     object-fit: cover;
+  }
+
+  .news-card.figure-fit-contain > img {
+    object-fit: contain;
+    padding: 0.6rem;
   }
 
   .news-card-media-collage {

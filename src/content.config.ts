@@ -13,6 +13,7 @@ const news = defineCollection({
     imageAlt: z.string().optional(),
     images: z.array(z.string()).min(1).optional(),
     imageAlts: z.array(z.string()).min(1).optional(),
+    imageFit: z.enum(['cover', 'contain']).optional(),
     externalUrl: z.string().url().optional(),
   }).refine((entry) => {
     const hasSingleImage = Boolean(entry.image && entry.imageAlt);

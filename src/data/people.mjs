@@ -19,7 +19,7 @@ export const people = [
   { id: 'ian-dong', name: 'Ian Dong', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'berke-basak', name: 'Berke Basak', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'jeffrey-gertler', name: 'Jeffrey Gertler', role: 'Graduate student', group: 'alumni', destination: 'MIT Lincoln Lab' },
-  { id: 'ebru-dogan', name: 'Ebru Dogan', role: 'Graduate student', group: 'alumni', destination: 'Atlantic Quantum Inc' },
+  { id: 'ebru-dogan', name: 'Ebru Dogan', role: 'Graduate student', group: 'alumni', destination: 'Google Quantum AI' },
   { id: 'dario-rosenstock', name: 'Dario Rosenstock', role: 'Graduate student', group: 'alumni', destination: 'Google Quantum AI' },
   { id: 'xiaowei-deng', name: 'Xiaowei Deng', role: 'Postdoctoral associate', group: 'alumni', destination: 'SUSTC' },
   { id: 'juliang-li', name: 'Juliang Li', role: 'Postdoctoral associate', group: 'alumni', destination: 'Fermilab' },
@@ -39,4 +39,6 @@ export const people = [
   { id: 'ben-kuchma-alumni', name: 'Ben Kuchma', role: 'Undergraduate student', group: 'alumni', destination: 'MIT Physics' },
   { id: 'alison-irwin-alumni', name: 'Alison Irwin', role: 'Undergraduate student', group: 'alumni', destination: 'UMass Chan Medical School' },
   { id: 'jiayi-sun-alumni', name: 'Jiayi Sun', role: 'Undergraduate student', group: 'alumni', destination: 'Stanford Applied Physics' },
+  { id: 'connor-casey-alumni', name: 'Connor Casey', role: 'Undergraduate student', group: 'alumni' },
+  { id: 'isaac-pelenur', name: 'Isaac Pelenur', role: 'Undergraduate student', group: 'alumni' },
 ];

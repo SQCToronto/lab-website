@@ -42,11 +42,14 @@ for (const [file, required] of [
 test('people page carries the updated roster and alumni', async () => {
   const html = await readFile('dist/people/index.html', 'utf8');
   for (const name of ['Chen Wang', 'Sean van Geldern', 'Baojie Liu', 'Carlos Sanchez Cruz', 'Layla Saraj', 'Ian Dong', 'Berke Basak', 'Yingying Wang', 'Shruti Shirol']) assert.match(html, new RegExp(name));
-  assert.match(html, /Postdoctoral associates and research scientist/);
+  assert.match(html, /Postdoctoral scholars/);
+  assert.doesNotMatch(html, /Postdoctoral associates and research scientist/);
   assert.ok(html.indexOf('Baojie Liu') < html.indexOf('Sean van Geldern'));
   assert.ok(html.indexOf('Former graduate students') < html.indexOf('Former postdoctoral associates') && html.indexOf('Former postdoctoral associates') < html.indexOf('Former undergraduate students'));
   assert.doesNotMatch(html, /images\/people\/yingying-wang\.jpg/);
   assert.doesNotMatch(html, /images\/people\/shruti-shirol\.jpg/);
+  const alumniHtml = html.slice(html.indexOf('A growing scientific family.'), html.indexOf('From our first chapter to the next.'));
+  assert.doesNotMatch(alumniHtml, /person-role/);
   for (const image of ['Group-photo-2017.jpg', 'Group-photo-2019.jpg', 'Group-photo-2021.jpg', 'group-photo-2023.jpg', 'Group-photo-2023b.jpg', 'Group-photo-2026.jpg', 'Group-photo-2026b.jpg']) assert.match(html, new RegExp(image));
   assert.doesNotMatch(html, /group-photo-2025\.jpg/);
   assert.doesNotMatch(html, /SQT Lab archive/);
@@ -73,8 +76,8 @@ test('publications page preserves recent and landmark work', async () => {
 
 test('news page records the Toronto launch and the current lab updates without duplicating publication cards', async () => {
   const html = await readFile('dist/news/index.html', 'utf8');
-  for (const text of ['A living record of the lab.', 'University of Toronto', 'Exciting Progress in Toronto Lab Construction', 'late October', 'Sean van Geldern', 'Shruti Shirol', 'Q-CTRL']) assert.match(html, new RegExp(text));
-  for (const image of ['Lab-construction-August.jpeg', 'Sean-cake.jpg', 'Sean-defense.jpg', 'Shruti-defense.jpg']) assert.match(html, new RegExp(image));
+  for (const text of ['A living record of the lab.', 'University of Toronto', 'Exciting Progress in Toronto Lab Construction', 'late October', 'Sean van Geldern', 'Shruti Shirol', 'Q-CTRL', 'Dilution Fridges Ready for Transit', 'temporary home for transit']) assert.match(html, new RegExp(text));
+  for (const image of ['Lab-construction-August.jpeg', 'Sean-cake.jpg', 'Sean-defense.jpg', 'Shruti-defense.jpg', 'fridge-transit-20260903.jpg', 'fridge-transit-20260902.jpg']) assert.match(html, new RegExp(image));
   for (const text of ['Passive Quantum Error Correction of Photon Loss at Breakeven', 'Hardware-Efficient Erasure Qubits With Superconducting Transmon Qutrits', 'Non-Markovian Relaxation Spectroscopy']) assert.doesNotMatch(html, new RegExp(text));
   assert.match(html, /figure-fit-contain/);
   assert.match(html, /Shruti-defense\.jpg/);

@@ -9,7 +9,7 @@ const principalInvestigator = people.find((person) => person.group === 'principa
 const currentPeople = people.filter((person) => person.group !== 'alumni' && person.group !== 'principal-investigator');
 const currentGroups = [
   {
-    label: 'Postdoctoral associates and research scientist',
+    label: 'Postdoctoral scholars',
     members: [
       ...currentPeople.filter((person) => person.group === 'research-scientist'),
       ...currentPeople.filter((person) => person.group === 'postdoctoral'),
@@ -74,7 +74,7 @@ const groupHistory = [
       {alumniGroups.map((section) => section.members.length > 0 && (
         <div class="alumni-group">
           <h3>{section.label}</h3>
-          <div class="alumni-grid">{section.members.map((person) => <PersonEntry person={person} portrait={false} />)}</div>
+          <div class="alumni-grid">{section.members.map((person) => <PersonEntry person={person} portrait={false} showRole={false} />)}</div>
         </div>
       ))}
     </div>

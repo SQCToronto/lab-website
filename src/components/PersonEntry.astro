@@ -12,9 +12,10 @@ interface Props {
   };
   featured?: boolean;
   portrait?: boolean;
+  showRole?: boolean;
 }
 
-const { person, featured = false, portrait = true } = Astro.props;
+const { person, featured = false, portrait = true, showRole = true } = Astro.props;
 const initials = person.name.split(' ').map((part) => part[0]).slice(0, 2).join('');
 ---
 
@@ -26,7 +27,7 @@ const initials = person.name.split(' ').map((part) => part[0]).slice(0, 2).join(
   </div>}
   <div class="person-copy">
     <h3>{person.name}</h3>
-    <p class="person-role">{person.role}</p>
+    {showRole && <p class="person-role">{person.role}</p>}
     {person.detail && <p class="person-detail">{person.detail}</p>}
     {person.destination && <p class="person-destination">{person.destination}</p>}
   </div>

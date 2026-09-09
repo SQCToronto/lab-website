@@ -15,7 +15,7 @@ export const people = [
   { id: 'zetong-zhuang', name: 'Zetong Zhuang', role: 'Graduate student', group: 'graduate', image: '/images/people/zetong-zhuang.jpg' },
   { id: 'manthan-badbaria', name: 'Manthan Badbaria', role: 'Graduate student', group: 'graduate' },
   { id: 'carlos-sanchez-cruz', name: 'Carlos Sanchez Cruz', role: 'Graduate student', group: 'graduate' },
-  { id: 'layla-saraj', name: 'Layla Saraj', role: 'Graduate student', group: 'graduate' },
+  { id: 'leyla-saraj', name: 'Leyla Saraj', role: 'Graduate student', group: 'graduate' },
   { id: 'ian-dong', name: 'Ian Dong', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'berke-basak', name: 'Berke Basak', role: 'Undergraduate student', group: 'undergraduate' },
   { id: 'david-gao', name: 'David Gao', role: 'Undergraduate student', group: 'undergraduate' },

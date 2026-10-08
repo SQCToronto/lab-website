@@ -66,6 +66,10 @@ const media = images?.length ? images.map((src, index) => ({ src, alt: imageAlts
     padding: 0.6rem;
   }
 
+  .news-card.figure-fit-contain .news-card-media img {
+    object-fit: contain;
+  }
+
   .news-card-media-collage {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));

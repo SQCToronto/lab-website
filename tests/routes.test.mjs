@@ -41,7 +41,7 @@ for (const [file, required] of [
 
 test('people page carries the updated roster and alumni', async () => {
   const html = await readFile('dist/people/index.html', 'utf8');
-  for (const name of ['Chen Wang', 'Sean van Geldern', 'Baojie Liu', 'Carlos Sanchez Cruz', 'Layla Saraj', 'Ian Dong', 'Berke Basak', 'Yingying Wang', 'Shruti Shirol']) assert.match(html, new RegExp(name));
+  for (const name of ['Chen Wang', 'Sean van Geldern', 'Baojie Liu', 'Carlos Sanchez Cruz', 'Leyla Saraj', 'Ian Dong', 'Berke Basak', 'Yingying Wang', 'Shruti Shirol']) assert.match(html, new RegExp(name));
   assert.match(html, /Postdoctoral scholars/);
   assert.doesNotMatch(html, /Postdoctoral associates and research scientist/);
   assert.ok(html.indexOf('Baojie Liu') < html.indexOf('Sean van Geldern'));

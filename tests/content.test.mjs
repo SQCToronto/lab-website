@@ -22,7 +22,7 @@ test('publishes the current SQT Lab roster with updated roles', () => {
     ['Sean van Geldern', 'postdoctoral', 'Postdoctoral Associate'],
     ['Baojie Liu', 'research-scientist', 'Research Scientist'],
     ['Carlos Sanchez Cruz', 'graduate', 'Graduate student'],
-    ['Layla Saraj', 'graduate', 'Graduate student'],
+    ['Leyla Saraj', 'graduate', 'Graduate student'],
     ['Ian Dong', 'undergraduate', 'Undergraduate student'],
     ['Berke Basak', 'undergraduate', 'Undergraduate student'],
   ];
